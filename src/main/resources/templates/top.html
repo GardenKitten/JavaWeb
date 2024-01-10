@@ -19,11 +19,13 @@
 
         <p th:if="${session.memberLogin}"><a href="/index/logOut" style="font-size:x-small;text-decoration:none;">退出</a>
           <a href="/index/toRegister" style="font-size:x-small;text-decoration:none;">注册</a>
+          <a href="/index/toVIPsubscribe" style="font-size:x-small;text-decoration:none;">会员开通</a>
           <a href="/admin/toAdminLogin" style="font-size:x-small;text-decoration:none;">后台登录</a>
         </p>
         <p th:unless="${session.memberLogin}">
           <a href="/index/toLogin" style="font-size:x-small;text-decoration:none;">登录</a>&nbsp;
           <a href="/index/toRegister" style="font-size:x-small;text-decoration:none;">注册</a>&nbsp;&nbsp;
+          <a href="/index/toVIPRegister" style="font-size:x-small;text-decoration:none;">会员注册</a>
           <a href="/admin/toAdminLogin" style="font-size:x-small;text-decoration:none;">后台登录</a>&nbsp;&nbsp;
         </p>
       </td>

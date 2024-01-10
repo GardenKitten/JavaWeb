@@ -23,8 +23,9 @@ public class TbMember implements Serializable {
     private double ye;
 
     public TbMember(){}
-    public TbMember(String email, String password) {
+    public TbMember(String email, String password,int jifen) {
         this.email = email;
         this.password = password;
+        this.jifen=jifen;//是否是会员，是则为1，不是则为0
     }
 }

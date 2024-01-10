@@ -61,10 +61,27 @@ public class IndexController {
     public String toLogin(){
         return "login";
     }
+
+    //跳转普通注册界面
     @RequestMapping("/index/toRegister")
     public String toRegister(){
         return "register";
     }
+
+
+    //跳转会员注册界面
+    @RequestMapping("/index/toVIPRegister")
+    public String toVIPRegister(){
+        return "VIPregister";
+    }
+
+    //跳转会员开通界面
+    @RequestMapping("/index/toVIPsubscribe")
+    public String toVIPsubscribe(){
+        return "VIPsubscribe";
+    }
+
+    //普通用户登录
     @RequestMapping("/index/doLogin")
     @ResponseBody
     public String doLogin(String email, String password, HttpSession session) {
@@ -78,11 +95,14 @@ public class IndexController {
         }
     }
 
+
+    //普通用户注册，设置jifen为0
     @RequestMapping("/index/doRegister")
     @ResponseBody
     public String doRegister(String email,String passw1,HttpServletResponse response){
         // 调用业务层确定合法并且存储数据
-        String ticket=memberService.register(email,passw1);
+        String ticket=memberService.register(email,passw1,0);
+        //System.out.println("调用了非会员注册");
         // 控制层存储业务层注册成功的rediskey值
         // !"".equals(ticket)&&ticket!=null
         if(!StringUtils.isEmpty(ticket)){
@@ -94,10 +114,56 @@ public class IndexController {
             response.addCookie(cookie);
             return "注册成功！";
         }else{
+
             return "注册失败！";
         }
     }
 
+    //会员注册,设置jifen为1
+    @RequestMapping("/index/doVIPRegister")
+    @ResponseBody
+    public String doVIPRegister(String email,String passw1,HttpServletResponse response){
+        // 调用业务层确定合法并且存储数据
+        String ticket=memberService.register(email,passw1,1);
+        //System.out.println("调用了会员注册");
+        // 控制层存储业务层注册成功的rediskey值
+        // !"".equals(ticket)&&ticket!=null
+        if(!StringUtils.isEmpty(ticket)){
+            // ticket非空，表示redis已经存好当前注册的结果
+            // 将ticket添加到cookie，cookie过期时间设置为-1，表示：不设置生效时间，默认浏览器关闭即失效。
+            Cookie cookie=new Cookie("FLOWER_TICKET",ticket);
+            cookie.setMaxAge(-1);
+            cookie.setPath("/");
+            response.addCookie(cookie);
+            return "会员注册成功！";
+        }else{
+            return "注册失败！";
+        }
+    }
+
+    //会员开通
+    @RequestMapping("/index/doVIPsubscribe")
+    @ResponseBody
+    public String doVIPsubscribe(String email,String passw1,HttpServletResponse response){
+        // 调用业务层确定合法并且存储数据
+        String ticket=memberService.subscribe(email,passw1,1);
+       // System.out.println("调用了会员开通");
+        // 控制层存储业务层注册成功的rediskey值
+        // !"".equals(ticket)&&ticket!=null
+        if(!StringUtils.isEmpty(ticket)){
+            // ticket非空，表示redis已经存好当前注册的结果
+            // 将ticket添加到cookie，cookie过期时间设置为-1，表示：不设置生效时间，默认浏览器关闭即失效。
+            Cookie cookie=new Cookie("FLOWER_TICKET",ticket);
+            cookie.setMaxAge(-1);
+            cookie.setPath("/");
+            response.addCookie(cookie);
+            return "会员开通成功！";
+        }else{
+            return "注册失败！";
+        }
+    }
+
+    //登出
     @RequestMapping("/index/logOut")
     public String logOut( HttpSession session){
         session.removeAttribute("memberLogin");

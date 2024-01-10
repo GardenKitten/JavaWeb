@@ -2,8 +2,10 @@ package cn.edu.scnu.service;
 
 import cn.edu.scnu.common.MD5Util;
 import cn.edu.scnu.common.MapperUtil;
+import cn.edu.scnu.entity.Flower;
 import cn.edu.scnu.entity.TbMember;
 import cn.edu.scnu.mapper.MemberMapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,9 +33,10 @@ public class MemberService extends ServiceImpl<MemberMapper, TbMember> {
         }
     }
 
-
-    public String register(String email,String password){
-        TbMember member=new TbMember(email,MD5Util.md5(password));
+//jifen为是否是会员，会员则为1，非会员为0
+    public String register(String email,String password,int jifen){
+        TbMember member=new TbMember(email,MD5Util.md5(password),jifen);
+        //System.out.println("jifen是"+jifen);
         if(memberMapper.insert(member)>0){
             String ticket= UUID.randomUUID().toString();
             // 判断如果插入成功，将当前注册结果进行缓存，并设置用户登录超时30分钟（设置过期时间为30分钟）
@@ -42,5 +45,12 @@ public class MemberService extends ServiceImpl<MemberMapper, TbMember> {
         }else{
             return "";
         }
+    }
+
+    public String subscribe(String email, String passw1, int i) {
+        QueryWrapper<TbMember> queryWrapper=new QueryWrapper<>();
+        queryWrapper.select("distinct fclass");
+        memberMapper.selectOne(queryWrapper);
+        return"";
     }
 }
