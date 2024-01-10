@@ -35,12 +35,13 @@ $(function(){
         var passw1 = $("input[name='passw1']").val();
         if(flag){
             $.post("/index/doVIPRegister",{"email":email,"passw1":passw1},function(result){
-                if(result=="注册成功"){
+                if(result=="会员注册成功！"){
                     alert(result);
                     window.location.href("/index");
                 }else{
                     alert(result);
                 }
+
                 $("#form_msg").html(result);
                 $("#form_msg").css("color","red");
             });

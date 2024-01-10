@@ -6,6 +6,7 @@ import cn.edu.scnu.entity.Flower;
 import cn.edu.scnu.entity.TbMember;
 import cn.edu.scnu.mapper.MemberMapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,10 +48,33 @@ public class MemberService extends ServiceImpl<MemberMapper, TbMember> {
         }
     }
 
-    public String subscribe(String email, String passw1, int i) {
+    public boolean subscribe(String email, String passw1) {
         QueryWrapper<TbMember> queryWrapper=new QueryWrapper<>();
-        queryWrapper.select("distinct fclass");
-        memberMapper.selectOne(queryWrapper);
-        return"";
+        queryWrapper.eq("email", email);
+        queryWrapper.eq("password", MD5Util.md5(passw1));
+        queryWrapper.eq("jifen", 0);
+        TbMember result=memberMapper.selectOne(queryWrapper);
+
+        if(result!=null)
+        {
+            UpdateWrapper<TbMember> updateWrapper = new UpdateWrapper<>();
+            updateWrapper.eq("email", email).eq("password", MD5Util.md5(passw1));
+
+        // 设置更新的字段和值
+            TbMember updateEntity = new TbMember();
+            updateEntity.setJifen(1);
+
+        // 执行更新操作
+            int rowsAffected = memberMapper.update(updateEntity, updateWrapper);
+
+
+            System.out.println("会员开通");
+
+            return true;
+        }else {
+            System.out.println("会员存在");
+            return false;}
+
+
     }
 }

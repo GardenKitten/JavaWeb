@@ -39,7 +39,7 @@ $(function(){
 					alert(result);
 					window.location.href("/index");
 				}else{
-					alert("注册失败！用户已存在");
+					alert(result);
 				}
 					$("#form_msg").html(result);
 					$("#form_msg").css("color","red");

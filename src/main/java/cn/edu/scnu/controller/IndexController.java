@@ -112,7 +112,7 @@ public class IndexController {
             cookie.setMaxAge(-1);
             cookie.setPath("/");
             response.addCookie(cookie);
-            return "注册成功！";
+            return "注册成功";
         }else{
 
             return "注册失败！";
@@ -146,20 +146,13 @@ public class IndexController {
     @ResponseBody
     public String doVIPsubscribe(String email,String passw1,HttpServletResponse response){
         // 调用业务层确定合法并且存储数据
-        String ticket=memberService.subscribe(email,passw1,1);
-       // System.out.println("调用了会员开通");
-        // 控制层存储业务层注册成功的rediskey值
-        // !"".equals(ticket)&&ticket!=null
-        if(!StringUtils.isEmpty(ticket)){
-            // ticket非空，表示redis已经存好当前注册的结果
-            // 将ticket添加到cookie，cookie过期时间设置为-1，表示：不设置生效时间，默认浏览器关闭即失效。
-            Cookie cookie=new Cookie("FLOWER_TICKET",ticket);
-            cookie.setMaxAge(-1);
-            cookie.setPath("/");
-            response.addCookie(cookie);
-            return "会员开通成功！";
+       boolean success=memberService.subscribe(email,passw1);
+
+        if(success){
+
+            return "开通成功";
         }else{
-            return "注册失败！";
+            return "您已经是会员了！";
         }
     }
 
