@@ -15,9 +15,9 @@ public class MyFlower {
     private String director;
     private String url;
     private Integer price;
-    private Integer yourprice;
-//    private MultipartFile pictures;
     private MultipartFile picturem;
+//    private Integer yourprice;
+//    private MultipartFile pictures;
 //    private MultipartFile pictureb;
 //    private MultipartFile pictured;
 //    private MultipartFile cailiaopicture;
@@ -95,14 +95,14 @@ public class MyFlower {
     public void setPrice(Integer price) {
         this.price = price;
     }
-
-    public Integer getYourprice() {
-        return yourprice;
-    }
-
-    public void setYourprice(Integer yourprice) {
-        this.yourprice = yourprice;
-    }
+//
+//    public Integer getYourprice() {
+//        return yourprice;
+//    }
+//
+//    public void setYourprice(Integer yourprice) {
+//        this.yourprice = yourprice;
+//    }
 
 //    public MultipartFile getPictures() {
 //        return pictures;

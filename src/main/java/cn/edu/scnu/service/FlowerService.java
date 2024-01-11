@@ -195,9 +195,9 @@ public class FlowerService extends ServiceImpl<FlowerMapper,Flower> {
         if(!"".equals(fclass)&&fclass!=null){
             queryWrapper.like("fclass",fclass);
         }
-        queryWrapper.between("yourprice",minprice,maxprice);
+//      queryWrapper.between("yourprice",minprice,maxprice);
         int count=flowerMapper.selectCount(queryWrapper).intValue();
-        queryWrapper.orderByDesc("sellednum");
+//      queryWrapper.orderByDesc("sellednum");
         //构建分页对象（第一个参数是当前页数，第二个参数是每页条数
         Page<Flower> page=new Page<Flower>(pageNo,pageSize);
         flowerMapper.selectPage(page,queryWrapper);
