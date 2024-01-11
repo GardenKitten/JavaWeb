@@ -77,26 +77,27 @@ body{
 	color:#CC0000;
 	
 }
-#prod_content #gotocart_div{
-	float:left;
-	width:110px;
-	height:32px;
-	margin-top:15px;
-	text-align: center;
-	line-height:32px;
-	border-top: 1px solid #D4D4D4;
-}
-#gotocart_div a{
-	display: block;
-	width:110px;
-	height:32px;
-	color:#666666;
-	text-decoration: none;
-}
-#gotocart_div a:hover{
-	background-color: #FF0000;
-	color:#fff;
-}
+/*#prod_content #gotocart_div{*/
+/*	float:left;*/
+/*	width:110px;*/
+/*	height:32px;*/
+/*	margin-top:15px;*/
+/*	text-align: center;*/
+/*	line-height:32px;*/
+/*	border-top: 1px solid #D4D4D4;*/
+/*}*/
+/*#gotocart_div a{*/
+/*	display: block;*/
+/*	width:110px;*/
+/*	height:32px;*/
+/*	color:#666666;*/
+/*	text-decoration: none;*/
+/*}*/
+
+/*#gotocart_div a:hover{*/
+/*	background-color: #FF0000;*/
+/*	color:#fff;*/
+/*}*/
 
 #say_div{
 	float:left;
