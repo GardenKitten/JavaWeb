@@ -12,23 +12,27 @@ import java.io.Serializable;
 public class Flower implements Serializable{
     private static final long serialVersionUID=-3710185376322109571L;
     @TableId
-    private String flowerid;
-    private String fname;
-    private String myclass;
-    private String fclass;
-    private String fclass1;
-    private String cailiao;
-    private String baozhuang;
-    private String huayu;
-    private String shuoming;
-    private Integer price;
-    private Integer yourprice;
-    private String pictures;
-    private String picturem;
-    private String pictureb;
-    private String pictured;
-    private String cailiaopicture;
-    private String bzpicture;
-    private String tejia;
-    private Integer sellednum;
+    private Integer flowerid; //电影id
+    private String fname;   //电影名字
+
+    private String myclass; //上映日期
+    private String fclass;  //电影类型
+    private String fclass1; //国家
+    private String cailiao; //演员
+    private String baozhuang;//编剧
+    private String huayu;   //语言
+    private String director;//导演
+    private String shuoming;//电影简介
+    private String url;     //电影播放地址
+    private String length;  //片长
+    private Integer price;  //电影评分
+    private String picturem;//电影图片地址
+//    private Integer yourprice;
+//    private String pictures;1
+//    private String pictureb;
+//    private String pictured;
+//    private String cailiaopicture;
+//    private String bzpicture;
+//    private String tejia;
+//    private Integer sellednum;
 }

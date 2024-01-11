@@ -11,15 +11,18 @@ public class MyFlower {
     private String baozhuang;
     private String huayu;
     private String shuoming;
+    private String length;
+    private String director;
+    private String url;
     private Integer price;
-    private Integer yourprice;
-    private MultipartFile pictures;
     private MultipartFile picturem;
-    private MultipartFile pictureb;
-    private MultipartFile pictured;
-    private MultipartFile cailiaopicture;
-    private MultipartFile bzpicture;
-    private String tejia;
+//    private Integer yourprice;
+//    private MultipartFile pictures;
+//    private MultipartFile pictureb;
+//    private MultipartFile pictured;
+//    private MultipartFile cailiaopicture;
+//    private MultipartFile bzpicture;
+//    private String tejia;
 
     public String getFname() {
         return fname;
@@ -92,22 +95,22 @@ public class MyFlower {
     public void setPrice(Integer price) {
         this.price = price;
     }
+//
+//    public Integer getYourprice() {
+//        return yourprice;
+//    }
+//
+//    public void setYourprice(Integer yourprice) {
+//        this.yourprice = yourprice;
+//    }
 
-    public Integer getYourprice() {
-        return yourprice;
-    }
-
-    public void setYourprice(Integer yourprice) {
-        this.yourprice = yourprice;
-    }
-
-    public MultipartFile getPictures() {
-        return pictures;
-    }
-
-    public void setPictures(MultipartFile pictures) {
-        this.pictures = pictures;
-    }
+//    public MultipartFile getPictures() {
+//        return pictures;
+//    }
+//
+//    public void setPictures(MultipartFile pictures) {
+//        this.pictures = pictures;
+//    }
 
     public MultipartFile getPicturem() {
         return picturem;
@@ -117,43 +120,61 @@ public class MyFlower {
         this.picturem = picturem;
     }
 
-    public MultipartFile getPictureb() {
-        return pictureb;
+    public String getLength() {
+        return length;
     }
 
-    public void setPictureb(MultipartFile pictureb) {
-        this.pictureb = pictureb;
+    public void setLength(String length) {
+        this.length = length;
     }
 
-    public MultipartFile getPictured() {
-        return pictured;
+    public String getUrl() {
+        return url;
     }
 
-    public void setPictured(MultipartFile pictured) {
-        this.pictured = pictured;
+    public void setUrl(String url) {
+        this.url = url;
     }
 
-    public MultipartFile getCailiaopicture() {
-        return cailiaopicture;
+    public String getDirector() {
+        return director;
     }
 
-    public void setCailiaopicture(MultipartFile cailiaopicture) {
-        this.cailiaopicture = cailiaopicture;
+    public void setDirector(String director) {
+        this.director = director;
     }
 
-    public MultipartFile getBzpicture() {
-        return bzpicture;
-    }
+//    public MultipartFile getPictureb() {
+//        return pictureb;
+//    }
+//
+//    public void setPictureb(MultipartFile pictureb) {
+//        this.pictureb = pictureb;
+//    }
+//
+//    public MultipartFile getPictured() {
+//        return pictured;
+//    }
+//
+//    public void setPictured(MultipartFile pictured) {
+//        this.pictured = pictured;
+//    }
+//
+//    public MultipartFile getCailiaopicture() {
+//        return cailiaopicture;
+//    }
+//
+//    public void setCailiaopicture(MultipartFile cailiaopicture) {
+//        this.cailiaopicture = cailiaopicture;
+//    }
+//
+//    public MultipartFile getBzpicture() {
+//        return bzpicture;
+//    }
+//
+//    public void setBzpicture(MultipartFile bzpicture) {
+//        this.bzpicture = bzpicture;
+//    }
+//
 
-    public void setBzpicture(MultipartFile bzpicture) {
-        this.bzpicture = bzpicture;
-    }
-
-    public String getTejia() {
-        return tejia;
-    }
-
-    public void setTejia(String tejia) {
-        this.tejia = tejia;
-    }
 }

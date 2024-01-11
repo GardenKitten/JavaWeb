@@ -25,10 +25,11 @@ public class IndexController {
     private FlowerService flowerService;
     @RequestMapping("/index")
     public String index(@RequestParam(name = "pageNo",defaultValue = "1")Integer pageNo,
-                        @RequestParam(name = "pageSize",defaultValue = "4")Integer pageSize,
-                        String fname,
+                        @RequestParam(name = "pageSize",defaultValue = "8")Integer pageSize,
+                        String cailiao,
                         String fclass,
                         String fclass1,
+                        boolean price,
                         Model model){
 //        if(minprice==null){
 //            minprice=0;
@@ -36,14 +37,15 @@ public class IndexController {
 //        if(maxprice==null||maxprice<minprice){
 //            maxprice=Integer.MAX_VALUE;
 //        }
-        Map<String, Object> map=flowerService.queryPage(fname,fclass,fclass1,pageNo,pageSize);
+        Map<String, Object> map=flowerService.queryPage(cailiao,fclass,fclass1,price,pageNo,pageSize);
      //  Map<String, Object> map=flowerService.queryPage(pageNo,pageSize);
         Integer count=(Integer) map.get("count");
         List<Flower> flowerList=(List<Flower>) map.get("flowerlist");
         int pageCount=(count%pageSize==0)?(count/pageSize):(count/pageSize+1);
-        model.addAttribute("fname",fname);
+        model.addAttribute("cailiao",cailiao);
         model.addAttribute("fclass",fclass);
         model.addAttribute("fclass1",fclass1);
+        model.addAttribute("price",price);
 //        model.addAttribute("minprice",minprice);
 //        model.addAttribute("maxprice",maxprice);
         model.addAttribute("pageCount",pageCount);
@@ -51,6 +53,7 @@ public class IndexController {
         model.addAttribute("flowerlist",flowerList);
         model.addAttribute("fclasses",flowerService.findfclass());
        model.addAttribute("fclasses1",flowerService.findfclass1());
+        //model.addAttribute("fclasses1",flowerService.findfclass1());
         return "index";
     }
     @RequestMapping("/index/flowerdetail")

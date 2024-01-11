@@ -25,9 +25,9 @@ public class CartService extends ServiceImpl<CartMapper,Cart> {
         if(_cart==null){
             Flower flower=flowerMapper.selectById(cart.getFlowerid());
             cart.setFname(flower.getFname());
-            cart.setPictures(flower.getPictures());
+//            cart.setPictures(flower.getPictures());
             cart.setPrice(flower.getPrice());
-            cart.setYourprice(flower.getYourprice());
+//            cart.setYourprice(flower.getYourprice());
             cartMapper.insert(cart);
         }else{
             _cart.setNum(_cart.getNum()+cart.getNum());

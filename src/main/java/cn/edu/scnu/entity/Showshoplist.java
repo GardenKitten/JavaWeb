@@ -8,7 +8,7 @@ public class Showshoplist {
     private String email;
     private String flowerid;
     private String fname;
-    private String pictures;
+//    private String pictures;
     private int price;
-    private int yourprice;
+//    private int yourprice;
 }
