@@ -30,14 +30,14 @@
 			<a th:href="'index/flowerdetail?flowerid='+${flower.flowerid}"><img th:src="@{'/picture/'+${flower.picturem}}" border="0"/>
 			</a>
 
-				<div id="prod_name_div" th:text="${flower.fname}" >蓝色至爱</div>
-				<div id="prod_price_div" th:text="'￥'+${flower.yourprice}" >￥1280元</div>
+				<div id="prod_name_div" th:text="${flower.fname}" ></div>
+				<div id="prod_price_div" th:text="'￥'+${flower.yourprice}" ></div>
 				<div>
 					<div id="gotocart_div">
 						<a th:href="'/cart/addCart?flowerid='+${flower.flowerid}">加入购物车</a></div>
 
 					</div>
-					<div id="say_div" th:text="${flower.sellednum}+'人购买'"></div>
+					<div id="say_div" th:text="${flower.sellednum}+'人观看'"></div>
 				</div>
 			</div>
 		</div>

@@ -12,27 +12,39 @@
         <td rowspan=7 width=200>
          <img th:src="'/picture/'+${flower.pictureb}"></td>
         <td colspan=2 align=center><div style="'font-weight:bold;font-size:medium;height:40px;line-height:40px;color:#000066;text-align:center;border-width:1px;  border-style:solid;border-color:red;'">
-            <span th:text="${flower.fname}">花名</span></div></td>
+            <span th:text="${flower.fname}">电影</span></div></td>
      </tr>
      <tr>
-       <td width=50><font size=2>材料：</font></td>
+       <td width=50><font size=2>演员：</font></td>
          <td> <span size="2" th:text="${flower.cailiao}"></span></td>
      </tr>
      <tr>
-     	<td width=50><font size=2>包装：</font></td>
+         <td width=50><font size=2>导演：</font></td>
+         <td> <span size="2" th:text="${flower.director}"></span></td>
+     </tr>
+     <tr>
+     	<td width=50><font size=2>编剧：</font></td>
      	<td><span size=2 th:text="${flower.baozhuang}"></span></td>
      </tr>
     <tr>
-     	<td width=50><font size=2>花语：</font></td>
+     	<td width=50><font size=2>语言：</font></td>
      	<td><span size=2 th:text="${flower.huayu}"></span></td>
      </tr>
      <tr>
-     	<td width=50><font size=2>说明：</font></td>
+         <td width=50><font size=2>片长：</font></td>
+         <td><span size=2 th:text="${flower.length}"></span></td>
+     </tr>
+     <tr>
+         <td width=50><font size=2>播放链接：</font></td>
+         <td><span size=2 th:text="${flower.url}"></span></td>
+     </tr>
+     <tr>
+     	<td width=50><font size=2>简介：</font></td>
      	<td><span size=2 th:text="${flower.shuoming}"></span></td>
      </tr>
      <tr>
      	<td colspan=2><div style='text-align:left;font-size: medium; color: #000066;'>
-     	<div style='text-decoration:line-through;margin-top:8px;'>原价:￥<span th:text="${flower.price}" />元</div>
+     	<div style='text-decoration:line-through;margin-top:8px;'>电影评分：<span th:text="${flower.price}" />分</div>
      	现价：<b>￥<span size=4 color=red th:text="${flower.yourprice}"></span>元</b></div>
      	</td>
      </tr>

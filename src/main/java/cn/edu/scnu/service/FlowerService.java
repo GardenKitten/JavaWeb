@@ -74,7 +74,7 @@ public class FlowerService extends ServiceImpl<FlowerMapper,Flower> {
         //1.创建Flower对象
         Flower flower=new Flower();
         //生成UUID
-        String flowerid = UUID.randomUUID().toString();
+        Integer flowerid = UUID.randomUUID().hashCode();
         flower.setFlowerid(flowerid);
         flower.setFname(myFlower.getFname());
         flower.setMyclass(myFlower.getMyclass());
@@ -83,11 +83,14 @@ public class FlowerService extends ServiceImpl<FlowerMapper,Flower> {
         flower.setCailiao(myFlower.getCailiao());
         flower.setBaozhuang(myFlower.getBaozhuang());
         flower.setHuayu(myFlower.getHuayu());
+        flower.setUrl(myFlower.getUrl());
+        flower.setDirector(myFlower.getDirector());
+        flower.setLength(myFlower.getLength());
         flower.setShuoming(myFlower.getShuoming());
         flower.setPrice(myFlower.getPrice());
-        flower.setYourprice(myFlower.getYourprice());
-        flower.setTejia(myFlower.getTejia());
-        flower.setSellednum(0);
+//        flower.setYourprice(myFlower.getYourprice());
+//        flower.setTejia(myFlower.getTejia());
+//        flower.setSellednum(0);
 
         // 2.生成多级路径
         String imgurl = "";
@@ -100,16 +103,17 @@ public class FlowerService extends ServiceImpl<FlowerMapper,Flower> {
 
         String dir = realpath + "/static/picture" + imgurl+"/";
         System.out.println(dir);
-        //处理pictures
-        MultipartFile pictures = myFlower.getPictures();
+
         String message ="";
-        if(!"".equals(pictures.getOriginalFilename())){
-            message = uploadfile(pictures,dir);
-            if(!"".equals(message)){
-                return message;
-            }else{
-                flower.setPictures(imgurl+"/"+pictures.getOriginalFilename());
-            }}
+//        //处理pictures
+//        MultipartFile pictures = myFlower.getPictures();
+//        if(!"".equals(pictures.getOriginalFilename())){
+//            message = uploadfile(pictures,dir);
+//            if(!"".equals(message)){
+//                return message;
+//            }else{
+//                flower.setPictures(imgurl+"/"+pictures.getOriginalFilename());
+//            }}
         //处理picturem
         MultipartFile picturem = myFlower.getPicturem();
         if(!"".equals(picturem.getOriginalFilename())){
@@ -119,43 +123,43 @@ public class FlowerService extends ServiceImpl<FlowerMapper,Flower> {
             }else{
                 flower.setPicturem(imgurl+"/"+picturem.getOriginalFilename());
             }}
-        //处理pictureb
-        MultipartFile pictureb = myFlower.getPictureb();
-        if(!"".equals(pictureb.getOriginalFilename())){
-            message = uploadfile(pictureb,dir);
-            if(!"".equals(message)){
-                return message;
-            }else{
-                flower.setPictureb(imgurl+"/"+pictureb.getOriginalFilename());
-            }}
-        //处理pictured
-        MultipartFile pictured = myFlower.getPictured();
-        if(!"".equals(pictured.getOriginalFilename())){
-            message = uploadfile(pictured,dir);
-            if(!"".equals(message)){
-                return message;
-            }else{
-                flower.setPictured(imgurl+"/"+pictured.getOriginalFilename());
-                System.out.println("数据库图片路径"+imgurl+pictured.getOriginalFilename());
-            }}
-        //处理bzpicture
-        MultipartFile bzpicture = myFlower.getBzpicture();
-        if(!"".equals(bzpicture.getOriginalFilename())){
-            message = uploadfile(bzpicture,dir);
-            if(!"".equals(message)){
-                return message;
-            }else{
-                flower.setBzpicture(imgurl+"/"+bzpicture.getOriginalFilename());
-            }}
-        //处理cailiaopicture
-        MultipartFile cailiaopicture = myFlower.getCailiaopicture();
-        if(!"".equals(cailiaopicture.getOriginalFilename())){
-            message = uploadfile(cailiaopicture,dir);
-            if(!"".equals(message)){
-                return message;
-            }else{
-                flower.setCailiaopicture(imgurl+"/"+cailiaopicture.getOriginalFilename());
-            }}
+//        //处理pictureb
+//        MultipartFile pictureb = myFlower.getPictureb();
+//        if(!"".equals(pictureb.getOriginalFilename())){
+//            message = uploadfile(pictureb,dir);
+//            if(!"".equals(message)){
+//                return message;
+//            }else{
+//                flower.setPictureb(imgurl+"/"+pictureb.getOriginalFilename());
+//            }}
+//        //处理pictured
+//        MultipartFile pictured = myFlower.getPictured();
+//        if(!"".equals(pictured.getOriginalFilename())){
+//            message = uploadfile(pictured,dir);
+//            if(!"".equals(message)){
+//                return message;
+//            }else{
+//                flower.setPictured(imgurl+"/"+pictured.getOriginalFilename());
+//                System.out.println("数据库图片路径"+imgurl+pictured.getOriginalFilename());
+//            }}
+//        //处理bzpicture
+//        MultipartFile bzpicture = myFlower.getBzpicture();
+//        if(!"".equals(bzpicture.getOriginalFilename())){
+//            message = uploadfile(bzpicture,dir);
+//            if(!"".equals(message)){
+//                return message;
+//            }else{
+//                flower.setBzpicture(imgurl+"/"+bzpicture.getOriginalFilename());
+//            }}
+//        //处理cailiaopicture
+//        MultipartFile cailiaopicture = myFlower.getCailiaopicture();
+//        if(!"".equals(cailiaopicture.getOriginalFilename())){
+//            message = uploadfile(cailiaopicture,dir);
+//            if(!"".equals(message)){
+//                return message;
+//            }else{
+//                flower.setCailiaopicture(imgurl+"/"+cailiaopicture.getOriginalFilename());
+//            }}
 
         flowerMapper.insert(flower);
 
