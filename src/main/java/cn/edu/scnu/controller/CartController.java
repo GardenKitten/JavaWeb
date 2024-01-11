@@ -19,11 +19,19 @@ public class CartController {
     @RequestMapping("/cart/addCart")
     public String addCart(String flowerid, HttpSession session){
         TbMember member=(TbMember)session.getAttribute("memberLogin");
-        Cart cart = new Cart();
-        cart.setFlowerid(flowerid);
-        cart.setEmail(member.getEmail());
-        cart.setNum(1);
-        cartService.addCart(cart);
+
+        //判断电影是否会员限定
+        //判断用户是否为会员
+        if(member.getJifen()==0)
+        {
+
+        }
+
+//        Cart cart = new Cart();
+//        cart.setFlowerid(flowerid);
+//        cart.setEmail(member.getEmail());
+//        cart.setNum(1);
+//        cartService.addCart(cart);
         return "redirect:/index";
     }
 

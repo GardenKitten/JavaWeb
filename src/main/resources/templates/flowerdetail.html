@@ -1,91 +1,108 @@
 <!DOCTYPE HTML>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-	<meta http-equiv="Content-type" content="text/html; charset=UTF-8" />
-	<link href="/css/prodList.css" rel="stylesheet" type="text/css">
+    <meta http-equiv="Content-type" content="text/html; charset=UTF-8"/>
+    <link href="/css/prodList.css" rel="stylesheet" type="text/css">
 </head>
 <body>
+<div id="app">
 <center>
-	<div id="top" th:insert="top.html"/>
- <table style='width:830px;border-width:1px;border-style:dotted;align:center;'>
-     <tr>
-        <td rowspan=7 width=200>
-         <img th:src="'/picture/'+${flower.picturem}"></td>
-        <td colspan=2 align=center><div style="'font-weight:bold;font-size:medium;height:40px;line-height:40px;color:#000066;text-align:center;border-width:1px;  border-style:solid;border-color:red;'">
-            <span th:text="${flower.fname}">电影</span></div></td>
-     </tr>
-     <tr>
-       <td width=50><font size=2>演员：</font></td>
-         <td> <span size="2" th:text="${flower.cailiao}"></span></td>
-     </tr>
-     <tr>
-         <td width=50><font size=2>导演：</font></td>
-         <td> <span size="2" th:text="${flower.director}"></span></td>
-     </tr>
-     <tr>
-     	<td width=50><font size=2>编剧：</font></td>
-     	<td><span size=2 th:text="${flower.baozhuang}"></span></td>
-     </tr>
-    <tr>
-     	<td width=50><font size=2>语言：</font></td>
-     	<td><span size=2 th:text="${flower.huayu}"></span></td>
-     </tr>
-     <tr>
-         <td width=50><font size=2>片长：</font></td>
-         <td><span size=2 th:text="${flower.length}"></span></td>
-     </tr>
-     <tr>
-         <td width=50><font size=2>播放链接：</font></td>
-         <td><span size=2 th:text="${flower.url}"></span></td>
-     </tr>
-     <tr>
-     	<td width=50><font size=2>简介：</font></td>
-     	<td><span size=2 th:text="${flower.shuoming}"></span></td>
-     </tr>
-     <tr>
-     	<td colspan=2><div style='text-align:left;font-size: medium; color: #000066;'>
-            <div style='text-decoration:line-through;margin-top:8px;'>电影评分：<span th:text="${flower.price}" />分</div></div>>
-     	</td>
-     </tr>
-     <tr>
-     	<td colspan=2><div id="gotocart_div">
-            <a th:href="'/cart/addCart?flowerid='+${flower.flowerid}">
-                <img th:src="@{/image/ingwc_ico.jpg}"></a>
-        </div>
-        </td>
+    <div id="top" th:insert="top.html"/>
+    <table style='width:90%;align:center;'>
+        <tr>
+            <td rowspan=6 width=200>
+                <img th:src="'/picture/'+${flower.picturem}" style="box-shadow: 0 2px 12px 8px rgba(255, 255, 255, .3)"></td>
+            <td colspan=2 align=center>
+                <div style="'font-weight:bold;font-size:40px;height:40px;line-height:40px;color:white;text-align:left;'">
+                    <span th:text="${flower.fname}">电影</span></div>
+            </td>
+        </tr>
+        <tr>
+            <td width=70 id="feature">演员：</td>
+            <td><span id="detail" size="2" th:text="${flower.cailiao}"></span></td>
+        </tr>
+        <tr>
+            <td width=70 id="feature">导演：</td>
+            <td><span id="detail" size="2" th:text="${flower.director}"></span></td>
+        </tr>
+        <tr>
+            <td width=70 id="feature">编剧：</td>
+            <td><span id="detail" size=2 th:text="${flower.baozhuang}"></span></td>
+        </tr>
+        <tr>
+            <td width=70 id="feature">语言：</td>
+            <td><span id="detail" size=2 th:text="${flower.huayu}"></span></td>
+        </tr>
+        <tr>
+            <td width=70 id="feature">片长：</td>
+            <td><span id="detail" size=2 th:text="${flower.length}"></span></td>
+        </tr>
+        <tr>
+            <!--播放按钮-->
+            <td style="vertical-align: top; ">
+                <el-button type="primary" icon="el-icon-film"><a th:href="${flower.url}" target="_blank">播放</a>
+                </el-button>
+            </td>
+            <td width=70 id="feature">简介：</td>
+            <td><span id="detail" size=2 th:text="${flower.shuoming}"></span></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td width=70 id="feature">电影评分：</td>
+            <td><span id="detail" size=2 th:text="${flower.price}"></span></td>
+        </tr>
 
-     </tr>
-<!--     <tr><td colspan=3><img th:src="'/picture/'+${flower.picturem}" border=0  onerror="this.style.display='none'"></td></tr>-->
-<!--     <tr><td colspan=3><img th:src="'/picture/'+${flower.cailiaopicture}" border=0  onerror="this.style.display='none'"></td></tr>-->
-<!--     <tr><td colspan=3><img th:src="'/picture/'+${flower.bzpicture}" border=0  onerror="this.style.display='none'"></td></tr>-->
- </table>
+        <!--     <tr><td colspan=3><img th:src="'/picture/'+${flower.picturem}" border=0  onerror="this.style.display='none'"></td></tr>-->
+        <!--     <tr><td colspan=3><img th:src="'/picture/'+${flower.cailiaopicture}" border=0  onerror="this.style.display='none'"></td></tr>-->
+        <!--     <tr><td colspan=3><img th:src="'/picture/'+${flower.bzpicture}" border=0  onerror="this.style.display='none'"></td></tr>-->
+    </table>
 
-<table style='width:830px;font-weight:bold;border-width:1px;border-style:dotted;align:center;height:40px;'>
-<tr><td>用户评价</td></tr>
-</table>
-<div th:each="shoplist:${shoplists}">
-<!--评价循环开始 -->
-<table style='width:830px;font-size:small;border-width:1px;border-style:solid;align:center;height:120px;'>
-<tr>
-<!--<td width=130 rowspan=2><img th:src="'/picture/'+${flower.pictures}"><br>-->
+    <table style='width:830px;font-weight:bold;border-width:1px;border-style:dotted;align:center;height:40px;'>
+        <tr>
+            <td>用户评价</td>
+        </tr>
+    </table>
+    <div th:each="shoplist:${shoplists}">
+        <!--评价循环开始 -->
+        <table style='width:830px;font-size:small;border-width:1px;border-style:solid;align:center;height:120px;'>
+            <tr>
+                <!--<td width=130 rowspan=2><img th:src="'/picture/'+${flower.pictures}"><br>-->
 
-</td>
-<td>整体评价：
-    <th:block th:each="i: ${#numbers.sequence(1, shoplist.pjstar)}">
-    <img src="/image/review_star_fen.gif">
-    </th:block>
-    <th:block th:if="${shoplist.pjstar lt 5}">
-        <th:block th:each="i: ${#numbers.sequence(shoplist.pjstar + 1,5)}">
-            <img src="/image/review_star_fen_gray.gif">
-        </th:block>
-    </th:block>
+                </td>
+                <td>整体评价：
+                    <th:block th:each="i: ${#numbers.sequence(1, shoplist.pjstar)}">
+                        <img src="/image/review_star_fen.gif">
+                    </th:block>
+                    <th:block th:if="${shoplist.pjstar lt 5}">
+                        <th:block th:each="i: ${#numbers.sequence(shoplist.pjstar + 1,5)}">
+                            <img src="/image/review_star_fen_gray.gif">
+                        </th:block>
+                    </th:block>
 
-</td>
-<td align=right>评价时间：<span th:text="${shoplist.pjtime}"/> &nbsp;&nbsp;&nbsp;IP:<span th:text="${shoplist.pjip}"/></td>
-</tr>
-<tr><td colspan=2 th:text="'评价内容：'+${shoplist.pjcontent}"></tr>
-</table>
-</div>
+                </td>
+                <td align=right>评价时间：<span th:text="${shoplist.pjtime}"/> &nbsp;&nbsp;&nbsp;IP:<span
+                        th:text="${shoplist.pjip}"/></td>
+            </tr>
+            <tr>
+                <td colspan=2 th:text="'评价内容：'+${shoplist.pjcontent}">
+            </tr>
+        </table>
+    </div>
 </center>
+</div>
+
+<!-- 引入vuejs -->
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<!-- 引入样式 -->
+<link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+<!-- 引入组件库 -->
+<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+
+<script>
+    new Vue({
+        el: '#app',
+    });
+</script>
+
 </body>
 </html>

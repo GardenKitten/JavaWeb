@@ -61,6 +61,12 @@ public class IndexController {
         model.addAttribute("flower",flowerService.findFlowerById(flowerid));
         return "flowerdetail";
     }
+
+    @RequestMapping("/toTest")
+    public String test(){
+
+        return "test";
+    }
     @RequestMapping("/index/toLogin")
     public String toLogin(){
         return "login";
