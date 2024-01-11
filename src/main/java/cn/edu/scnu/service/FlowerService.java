@@ -40,6 +40,17 @@ public class FlowerService extends ServiceImpl<FlowerMapper,Flower> {
         }
         return fclasses;
     }
+
+    public List<String> findfclass1() {
+        QueryWrapper<Flower> queryWrapper=new QueryWrapper<>();
+        queryWrapper.select("distinct fclass1");
+        List<Flower> flowers = flowerMapper.selectList(queryWrapper);
+        List<String> fclasses1=new ArrayList<>();
+        for (Flower flower:flowers){
+            fclasses1.add(flower.getFclass1());
+        }
+        return fclasses1;
+    }
     public String uploadfile(MultipartFile file, String dir){
         // 1.判断后缀是否合法
         // 获取图名称，后缀名称
@@ -187,7 +198,7 @@ public class FlowerService extends ServiceImpl<FlowerMapper,Flower> {
         flowerMapper.updateById(flower);
     }
 
-    public Map<String, Object> queryPage(String fname,String fclass,Integer minprice,Integer maxprice,Integer pageNo, Integer pageSize) {
+    public Map<String, Object> queryPage(String fname,String fclass,String fclass1,boolean price,Integer pageNo, Integer pageSize) {
         QueryWrapper<Flower> queryWrapper=new QueryWrapper<>();
         if(!"".equals(fname)&&fname!=null){
             queryWrapper.like("fname",fname);
@@ -195,7 +206,13 @@ public class FlowerService extends ServiceImpl<FlowerMapper,Flower> {
         if(!"".equals(fclass)&&fclass!=null){
             queryWrapper.like("fclass",fclass);
         }
-//      queryWrapper.between("yourprice",minprice,maxprice);
+
+        if(!"".equals(fclass1)&&fclass1!=null){
+            queryWrapper.like("fclass1",fclass1);
+        }
+        if(price){
+                 queryWrapper.between("price",9,10);
+        }
         int count=flowerMapper.selectCount(queryWrapper).intValue();
 //      queryWrapper.orderByDesc("sellednum");
         //构建分页对象（第一个参数是当前页数，第二个参数是每页条数
