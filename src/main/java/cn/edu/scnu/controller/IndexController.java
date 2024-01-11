@@ -28,28 +28,29 @@ public class IndexController {
                         @RequestParam(name = "pageSize",defaultValue = "4")Integer pageSize,
                         String fname,
                         String fclass,
-                        Integer minprice,
-                        Integer maxprice,
+                        String fclass1,
                         Model model){
-        if(minprice==null){
-            minprice=0;
-        }
-        if(maxprice==null||maxprice<minprice){
-            maxprice=Integer.MAX_VALUE;
-        }
-        Map<String, Object> map=flowerService.queryPage(fname,fclass,minprice,maxprice,pageNo,pageSize);
+//        if(minprice==null){
+//            minprice=0;
+//        }
+//        if(maxprice==null||maxprice<minprice){
+//            maxprice=Integer.MAX_VALUE;
+//        }
+        Map<String, Object> map=flowerService.queryPage(fname,fclass,fclass1,pageNo,pageSize);
      //  Map<String, Object> map=flowerService.queryPage(pageNo,pageSize);
         Integer count=(Integer) map.get("count");
         List<Flower> flowerList=(List<Flower>) map.get("flowerlist");
         int pageCount=(count%pageSize==0)?(count/pageSize):(count/pageSize+1);
         model.addAttribute("fname",fname);
         model.addAttribute("fclass",fclass);
-        model.addAttribute("minprice",minprice);
-        model.addAttribute("maxprice",maxprice);
+        model.addAttribute("fclass1",fclass1);
+//        model.addAttribute("minprice",minprice);
+//        model.addAttribute("maxprice",maxprice);
         model.addAttribute("pageCount",pageCount);
         model.addAttribute("currentPage",pageNo);
         model.addAttribute("flowerlist",flowerList);
         model.addAttribute("fclasses",flowerService.findfclass());
+       model.addAttribute("fclasses1",flowerService.findfclass1());
         return "index";
     }
     @RequestMapping("/index/flowerdetail")
