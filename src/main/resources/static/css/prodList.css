@@ -31,12 +31,14 @@ a {
 #content{
 	width:90%;
 	margin:10px 10px 10px 10px;
+	font-size: 16px;
 }
 /*搜索条*/
 #content #search_div{
 	border: 1px solid #D4D4D4;
 	padding:8px;
 	color: white;
+	background-color: #aaaaaa;
 }
 #content #search_div .input_span{
 	margin: 0px 0px 0px 15px;
