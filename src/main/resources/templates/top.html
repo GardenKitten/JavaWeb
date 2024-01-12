@@ -11,10 +11,9 @@
 
           <!--用戶操作-->
           <p th:if="${session.memberLogin}">
-            <el-button type="success" icon="el-icon-user"><a  href="/index/toRegister" style="font-size:x-small;text-decoration:none;">注册</a></el-button>
             <el-button type="primary" icon="el-icon-present"><a  href="/index/toVIPsubscribe" style="font-size:x-small;text-decoration:none;">会员开通</a></el-button>
             <el-button type="primary" icon="el-icon-view"><a  href="/admin/toAdminLogin" style="font-size:x-small;text-decoration:none;">后台登录</a></el-button>
-            <el-button type="dager" icon="el-icon-circle-close"><a href="/index/logOut" style="font-size:x-small;text-decoration:none;">退出</a></el-button>
+            <el-button type="danger" icon="el-icon-circle-close"><a href="/index/logOut" style="font-size:x-small;text-decoration:none;">退出</a></el-button>
           </p>
           <p th:unless="${session.memberLogin}">
               <el-button type="success" icon="el-icon-user"><a href="/index/toRegister" style="font-size:x-small;text-decoration:none;">注册</a></el-button>
@@ -41,7 +40,7 @@
       &nbsp; &nbsp; <span style=" color:White;"> |</span>&nbsp;&nbsp;&nbsp;
     </td>
     </tr>
-    <tr><td colspan=3>
+    <tr>
 <span style="font-weight:bold; font-size:x-small; font-family:宋体">
 </span>
     </td>

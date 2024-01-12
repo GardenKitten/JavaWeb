@@ -3,40 +3,115 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>欢迎登录鲜花礼品网</title>
-  <script src="/js/jquery-1.4.2.js"></script>
-  <script type="text/javascript" src="/js/login_ajax.js"></script>
+    <title>欢迎登录电影网站</title>
+    <link href="/css/login.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <script src="/js/jquery-1.4.2.js"></script>
+    <script type="text/javascript" src="/js/login_ajax.js"></script>
 </head>
 <body>
-<div id="top" th:insert="top.html"/>
-<br><br><center>
+<!--<div id="top" th:insert="top.html"/>-->
+<br><br>
+<center>
 
-  <h1>欢迎登录鲜花礼品网</h1>
-  <form>
-    <table>
-      <tr>
-        <td class="tdx">Email：</td>
-        <td><input type="text" id="username" name="email" value="a@163.com"/>
-          <span style="color:red"></span>
-        </td>
-      </tr>
-      <tr>
-        <td class="tdx">密&nbsp;&nbsp; 码：</td>
-        <td><input type="password" name="password" value="123"/>
-          <span style="color:red"></span>
-        </td>
-      </tr>
-      <tr>
-        <td colspan="2">
-          <input type="submit" name="s"  value="登录"/>
-        </td>
-      </tr>
-      <tr>
-        <td colspan="2">
-          <span id = "form_msg" style="color:red"></span>
-        </td>
-      </tr>
-    </table>
-  </form>
+    <h1>欢迎登录电影网站</h1>
+    <form>
+
+
+        <div class="con">
+            <!--     Start  header Content  -->
+            <header class="head-form">
+                <h2>登录</h2>
+                <!--     A welcome message or an explanation of the login form -->
+                <p>Please login here</p>
+            </header>
+            <!--     End  header Content  -->
+            <br>
+            <div class="field-set">
+
+                <!--   user name -->
+                <span class="input-item">
+             <i class="fa fa-user-circle"></i>
+           </span>
+                <!--   user name Input-->
+                <input class="form-input" id="txt-input" type="text" name="email" value="a@163.com" required>
+
+                <br>
+
+                <!--   Password -->
+
+                <span class="input-item">
+          <i class="fa fa-key"></i>
+         </span>
+                <!--   Password Input-->
+                <input class="form-input" type="password" value="123" id="pwd" name="password" required>
+
+                <!--      Show/hide password  -->
+                <span>
+          <i class="fa fa-eye" aria-hidden="true" type="button" id="eye"></i>
+       </span>
+
+
+                <br>
+                <!--        buttons -->
+                <!--      button LogIn -->
+                <button class="log-in" type="submit" > Log In</button>
+            </div>
+
+            <!--   other buttons -->
+            <div class="other" style="width: 80%;text-align: center">
+                <!--      Forgot Password button-->
+                <button class="btn submits frgt-pass" type="button" >返回</button>
+                <!--     Sign Up button -->
+                <button class="btn submits sign-up"  type="button"  style="width: 120px">注册
+                    <!--         Sign Up font icon -->
+                    <i class="fa fa-user-plus" aria-hidden="true"></i>
+                </button>
+                <!--      End Other the Division -->
+            </div>
+
+            <!--   End Conrainer  -->
+        </div>
+
+    </form>
+
+    <script>
+        function show() {
+            var p = document.getElementById('pwd');
+            p.setAttribute('type', 'text');
+        }
+
+        function hide() {
+            var p = document.getElementById('pwd');
+            p.setAttribute('type', 'password');
+        }
+
+        var pwShown = 0;
+
+        document.getElementById("eye").addEventListener("click", function () {
+            if (pwShown == 0) {
+                pwShown = 1;
+                show();
+            } else {
+                pwShown = 0;
+                hide();
+            }
+        }, false);
+
+        function redirectTo(url) {
+            window.location.href = url;
+        }
+
+        //返回
+        document.getElementsByClassName("btn submits frgt-pass")[0].addEventListener("click", function () {
+            redirectTo("./");
+        },false);
+
+        //登录
+        document.getElementsByClassName("btn submits sign-up")[0].addEventListener("click", function () {
+            redirectTo("toRegister");
+        },false);
+    </script>
+
 </body>
 </html>

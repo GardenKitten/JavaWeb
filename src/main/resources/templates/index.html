@@ -18,26 +18,26 @@
                     <span class="input_span">主创名：<input type="text" name="cailiao" placeholder="主创名"/></span>
 
                     <span class="input_span">类型：
-				<select name="fclass">
+				<select name="fclass" style="width: 100px">
 				<Option value="">不限</option>
 					<option th:each="fclass:${fclasses}" th:value="${fclass}" th:text="${fclass}"></option>
 				</select>
 				</span>
 
                     <span class="input_span">地区：
-				<select name="fclass1">
+				<select name="fclass1" style="width: 100px">
 				<Option value="">不限</option>
 					<option th:each="fclass1:${fclasses1}" th:value="${fclass1}" th:text="${fclass1}"></option>
 				</select>
 				</span>
 
-                    <span>
+                    <span class="input_span">
                     <label>
                         热播:
                         <input type="checkbox" name="price" value="true">
                     </label></span>
 
-                    <span> <input id="search_button" type="submit" value="查 询"></span>
+                    <span class="input_span"> <input id="search_button" type="submit" value="查 询"></span>
                 </form>
             </div>
 

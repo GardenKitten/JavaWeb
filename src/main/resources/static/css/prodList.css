@@ -36,9 +36,11 @@ a {
 /*搜索条*/
 #content #search_div{
 	border: 1px solid #D4D4D4;
-	padding:8px;
+	padding:5px;
 	color: white;
-	background-color: #aaaaaa;
+	background-color: lightsteelblue;
+	border-radius: 10px;
+
 }
 #content #search_div .input_span{
 	margin: 0px 0px 0px 15px;
