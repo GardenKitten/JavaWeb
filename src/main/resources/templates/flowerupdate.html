@@ -52,15 +52,15 @@
                 </td>
             </tr>
             <tr>
-                <td style="text-align:right"><font size=2>材料：</font></td>
+                <td style="text-align:right"><font size=2>演员：</font></td>
                 <td><TextArea name="cailiao" Rows="2" Cols="40" th:text="${flower.cailiao}"></TextArea></td>
             </tr>
             <tr>
-                <td style="text-align:right"><font size=2>包装：</font></td>
+                <td style="text-align:right"><font size=2>编剧：</font></td>
                 <td><TextArea name="baozhuang" Rows="2" Cols="40" th:text="${flower.baozhuang}"></TextArea></td>
             </tr>
             <tr>
-                <td style="text-align:right"><font size=2>花语：</font></td>
+                <td style="text-align:right"><font size=2>语言：</font></td>
                 <td><TextArea name="huayu" Rows="3" Cols="40"  th:text="${flower.huayu}"></TextArea></td>
             </tr>
             <tr>
@@ -71,19 +71,19 @@
                 <td style="text-align:right"><font size=2>市场价：</font></td>
                 <td><input type=text name="price" SIZE=18 th:value="${flower.price}"></td>
             </tr>
-            <tr>
-                <td style="text-align:right"><font size=2>现价：</font></td>
-                <td><input type=text name="yourprice" SIZE=18 th:value="${flower.yourprice}"></td>
-            </tr>
+<!--            <tr>-->
+<!--                <td style="text-align:right"><font size=2>现价：</font></td>-->
+<!--                <td><input type=text name="yourprice" SIZE=18 th:value="${flower.yourprice}"></td>-->
+<!--            </tr>-->
 
-            <tr>
-                <td style="text-align:right"><font size=2 th:text="'是否特价：'+${flower.tejia}">是否特价：</font></td>
-                <td><Select name="tejia" >
-                    <Option value="是" selected>是
-                    <Option value="否">否
-                </Select>
-                </td>
-            </tr>
+<!--            <tr>-->
+<!--                <td style="text-align:right"><font size=2 th:text="'是否特价：'+${flower.tejia}">是否特价：</font></td>-->
+<!--                <td><Select name="tejia" >-->
+<!--                    <Option value="是" selected>是-->
+<!--                    <Option value="否">否-->
+<!--                </Select>-->
+<!--                </td>-->
+<!--            </tr>-->
             <tr>
                 <td colspan=2 style="text-align:center"><INPUT type="submit" name="s" value="提交"></td></tr>
         </table>

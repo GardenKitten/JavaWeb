@@ -227,10 +227,10 @@ public class FlowerService extends ServiceImpl<FlowerMapper,Flower> {
         flowerMapper.updateById(flower);
     }
 
-    public Map<String, Object> queryPage(String fname,String fclass,String fclass1,boolean price,Integer pageNo, Integer pageSize) {
+    public Map<String, Object> queryPage(String cailiao,String fclass,String fclass1,boolean price,Integer pageNo, Integer pageSize) {
         QueryWrapper<Flower> queryWrapper=new QueryWrapper<>();
-        if(!"".equals(fname)&&fname!=null){
-            queryWrapper.like("fname",fname);
+        if(!"".equals(cailiao)&&cailiao!=null){
+            queryWrapper.like("cailiao",cailiao);
         }
         if(!"".equals(fclass)&&fclass!=null){
             queryWrapper.like("fclass",fclass);
