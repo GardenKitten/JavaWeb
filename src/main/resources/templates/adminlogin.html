@@ -2,35 +2,131 @@
  <html lang="en" xmlns:th="http://www.thymeleaf.org">
  <head>
   <meta charset="UTF-8">
-  <title>欢迎登录鲜花礼品网</title>
+  <title></title>
+     <link href="/css/login.css" rel="stylesheet" type="text/css">
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
   <script src="/js/jquery-1.4.2.js"></script>
   <script type="text/javascript" src="/js/adminlogin_ajax.js"></script>
  </head>
  <body>
- <div id="top" th:insert="admintop.html"/>
- <br><br><center>
 
-  <h1>鲜花礼品网后台登录</h1>
+ <br><br><br><br><center>
+
   <form >
-   <table style="width:480px; border-width:3px; border-style:dotted;">
-    <tr>
-     <td style="text-align:right;height:30px;">用户名：</td>
-     <td align=left><input type=text name="username" value="admin"></td>
-    </tr>
-    <tr>
-     <td style="text-align:right;height:30px;">密码：</td>
-     <td align=left><input type="password" name="password" value="123"></td>
-    </tr>
-    <tr><td colspan=2 style="text-align:center;height:60px;">
-     <input type="submit" name="s" value="登录">
-    </td></tr>
-    <tr>
-     <td colspan="2">
-      <span id = "form_msg" style="color:red"></span>
-     </td>
-    </tr>
-   </table>
+   <!--<table style="width:480px; border-width:3px; border-style:dotted;">-->
+   <!-- <tr>-->
+   <!--  <td style="text-align:right;height:30px;">用户名：</td>-->
+   <!--  <td align=left><input type=text name="username" value="admin"></td>-->
+   <!-- </tr>-->
+   <!-- <tr>-->
+   <!--  <td style="text-align:right;height:30px;">密码：</td>-->
+   <!--  <td align=left><input type="password" name="password" value="123"></td>-->
+   <!-- </tr>-->
+   <!-- <tr><td colspan=2 style="text-align:center;height:60px;">-->
+   <!--  <input type="submit" name="s" value="登录">-->
+   <!-- </td></tr>-->
+   <!-- <tr>-->
+   <!--  <td colspan="2">-->
+   <!--   <span id = "form_msg" style="color:red"></span>-->
+   <!--  </td>-->
+   <!-- </tr>-->
+   <!--</table>-->
+
+      <div class="con">
+          <!--     Start  header Content  -->
+          <header class="head-form">
+              <h2>后台登录</h2>
+              <!--     A welcome message or an explanation of the login form -->
+              <p>Please login here</p>
+          </header>
+          <!--     End  header Content  -->
+          <br>
+          <div class="field-set">
+
+              <!--   user name -->
+              <span class="input-item">
+             <i class="fa fa-user-circle"></i>
+           </span>
+              <!--   user name Input-->
+              <input class="form-input" id="txt-input" type="text" name="username" value="admin" required>
+
+              <br>
+
+              <!--   Password -->
+
+              <span class="input-item">
+          <i class="fa fa-key"></i>
+         </span>
+              <!--   Password Input-->
+              <input class="form-input" type="password" placeholder="请输入密码" value="123" id="pwd" name="password" required>
+
+              <!--      Show/hide password  -->
+              <span>
+          <i class="fa fa-eye" aria-hidden="true" type="button" id="eye"></i>
+       </span>
+
+
+              <br>
+              <!--        buttons -->
+              <!--      button LogIn -->
+              <button class="log-in" type="submit" style="background-color: lightblue"  > Log In</button>
+          </div>
+
+          <!--   other buttons -->
+          <div class="other" style="width: 80%;text-align: center">
+              <!--      Forgot Password button-->
+              <button class="btn submits frgt-pass" type="button" >返回</button>
+              <!--     Sign Up button -->
+              <button class="btn submits sign-up"  type="button"  style="width: 120px">普通登录
+                  <!--         Sign Up font icon -->
+                  <i class="fa fa-user-plus" aria-hidden="true"></i>
+              </button>
+              <!--      End Other the Division -->
+          </div>
+
+          <!--   End Conrainer  -->
+      </div>
+
   </form>
+
+     <script>
+         function show() {
+             var p = document.getElementById('pwd');
+             p.setAttribute('type', 'text');
+         }
+
+         function hide() {
+             var p = document.getElementById('pwd');
+             p.setAttribute('type', 'password');
+         }
+
+         var pwShown = 0;
+
+         document.getElementById("eye").addEventListener("click", function () {
+             if (pwShown == 0) {
+                 pwShown = 1;
+                 show();
+             } else {
+                 pwShown = 0;
+                 hide();
+             }
+         }, false);
+
+         function redirectTo(url) {
+             window.location.href = url;
+         }
+
+         //返回
+         document.getElementsByClassName("btn submits frgt-pass")[0].addEventListener("click", function () {
+             redirectTo("/index");
+         },false);
+
+         //登录
+         document.getElementsByClassName("btn submits sign-up")[0].addEventListener("click", function () {
+             redirectTo("/index/toLogin");
+         },false);
+     </script>
+
  </center>
  </body>
  </html>
