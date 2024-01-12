@@ -71,9 +71,6 @@
         <!--评价循环开始 -->
         <table style='width:830px;font-size:small;border-width:1px;border-style:solid;align:center;height:120px;'>
             <tr>
-                <!--<td width=130 rowspan=2><img th:src="'/picture/'+${flower.pictures}"><br>-->
-
-                </td>
                 <td>整体评价：
                     <th:block th:each="i: ${#numbers.sequence(1, shoplist.pjstar)}">
                         <img src="/image/review_star_fen.gif">
@@ -85,12 +82,9 @@
                     </th:block>
 
                 </td>
-                <td align=right>评价时间：<span th:text="${shoplist.pjtime}"/> &nbsp;&nbsp;&nbsp;IP:<span
-                        th:text="${shoplist.pjip}"/></td>
+                <td align=right>评价时间：<span th:text="${shoplist.pjtime}"/> &nbsp;&nbsp;&nbsp;IP:<span th:text="${shoplist.pjip}"/></td>
             </tr>
-            <tr>
-                <td colspan=2 th:text="'评价内容：'+${shoplist.pjcontent}">
-            </tr>
+            <tr><td colspan=2 th:text="'评价内容：'+${shoplist.pjcontent}"></tr>
         </table>
     </div>
 </center>
