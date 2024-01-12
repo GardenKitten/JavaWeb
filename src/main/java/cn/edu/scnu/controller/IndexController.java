@@ -1,11 +1,9 @@
 package cn.edu.scnu.controller;
 
 import cn.edu.scnu.entity.Flower;
-import cn.edu.scnu.entity.Shoplist;
 import cn.edu.scnu.entity.TbMember;
 import cn.edu.scnu.service.FlowerService;
 import cn.edu.scnu.service.MemberService;
-import cn.edu.scnu.service.ShoplistService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,16 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Map;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
+import java.util.Objects;
 
 @Controller
 public class IndexController {
@@ -34,9 +23,6 @@ public class IndexController {
     private MemberService memberService;
     @Autowired
     private FlowerService flowerService;
-    @Autowired
-    private ShoplistService shoplistService;
-
     @RequestMapping("/index")
     public String index(@RequestParam(name = "pageNo",defaultValue = "1")Integer pageNo,
                         @RequestParam(name = "pageSize",defaultValue = "10")Integer pageSize,
@@ -73,14 +59,31 @@ public class IndexController {
     @RequestMapping("/index/flowerdetail")
     public String flowerdetail(String flowerid,Model model){
         model.addAttribute("flower",flowerService.findFlowerById(flowerid));
-        List<Shoplist> shopLists = shoplistService.findAll();
-        model.addAttribute("shoplists",shopLists);
         return "flowerdetail";
     }
 
-    @RequestMapping("/index/showflower")
-    public String showflower(){
-        return "showflower";
+//会员权限控制
+    @RequestMapping("/index/flowerdetail/doPlayOn")
+    //@ResponseBody
+    public String doPlayOn(String flowerid,HttpSession session){
+        System.out.println("会员播放被调用");
+        TbMember member =(TbMember)session.getAttribute("memberLogin");
+        Flower flower=flowerService.findFlowerById(flowerid);
+        if (member != null) {
+
+            boolean permission =flowerService.checkUser(flower,member);
+           if(permission==true){
+               //String movieURL=flower.getUrl();
+               return "movieURL";
+            }
+            return "VIPsubscribe";
+
+        }
+
+        else
+            return "VIPregister";
+
+
     }
 
     @RequestMapping("/toTest")
@@ -187,6 +190,9 @@ public class IndexController {
         }
     }
 
+    //播放会员影片
+
+
     //登出
     @RequestMapping("/index/logOut")
     public String logOut( HttpSession session){
@@ -194,60 +200,4 @@ public class IndexController {
         return "redirect:/index";
     }
 
-    @RequestMapping("/index/generateExcelReport")
-    public ResponseEntity<byte[]> generateExcelReport() {
-        // 获取鲜花销售数据（用实际的数据获取逻辑替换这部分）
-        List<Flower> flowerSalesData = flowerService.getFlowerSalesData();
-
-        // 创建Excel工作簿和工作表
-        Workbook workbook = new XSSFWorkbook();
-        Sheet sheet = workbook.createSheet("电影评分报表");
-
-        // 创建标题行
-        Row headerRow = sheet.createRow(0);
-        headerRow.createCell(0).setCellValue("电影名称");
-        headerRow.createCell(1).setCellValue("日期");
-        headerRow.createCell(2).setCellValue("评分");
-
-        // 填充数据行
-        int rowNum = 1;
-        for (Flower flower : flowerSalesData) {
-            Row row = sheet.createRow(rowNum++);
-            row.createCell(0).setCellValue(flower.getFname());
-            row.createCell(1).setCellValue(flower.getMyclass());
-            row.createCell(2).setCellValue(flower.getPrice());
-        }
-
-        // 设置响应头
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
-        headers.setContentDispositionFormData("attachment", "movie_price_report.xlsx");
-
-        // 将工作簿转换为字节数组
-        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        try {
-            workbook.write(outputStream);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        // 以ResponseEntity形式返回字节数组
-        return new ResponseEntity<>(outputStream.toByteArray(), headers, HttpStatus.OK);
-    }
-
-    // 添加价格图表生成的请求处理方法
-    @GetMapping("/api/getPriceChartData")
-    @ResponseBody
-    public ResponseEntity<List<Flower>> getPriceChartData() {
-        List<Flower> priceChartData = flowerService.getTopPriceFlowers(10);
-        return ResponseEntity.ok(priceChartData);
-    }
-
-    // 添加销量图表生成的请求处理方法
-    @GetMapping("/api/getSalesChartData")
-    @ResponseBody
-    public ResponseEntity<List<Flower>> getSalesChartData() {
-        List<Flower> salesChartData = flowerService.getTopSalesFlowers(10);
-        return ResponseEntity.ok(salesChartData);
-    }
 }
