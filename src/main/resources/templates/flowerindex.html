@@ -2,40 +2,157 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
 	<meta charset="UTF-8">
+	<script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
 </head>
 <body>
 <center>
-<div id="top" th:insert="admintop.html"/>
-<a href="/admin/floweradd">添加鲜花</a>
-<table width="999px" border="0" cellpadding="0"
-			cellspacing="1" style="background:#d8d8d8;color:#333333">
-			<tr><th width="100px" height="30" align="center" valign="middle">商品编号</th>
-				<th width="150px" align="center" valign="middle">商品图片</th>
-				<th width="110px" height="30" align="center" valign="middle">商品名称</th>
-				<th width="100px" align="center" valign="middle" >原价</th>
-				<th width="100px" align="center" valign="middle">现价</th>
-				<th width="100px" align="center" valign="middle" >销售数量</th>				
-				<th width="100px" align="center" valign="middle">操作</th>				
-			
-			</tr>
-	<!--th: each开始 -->
-			<div th:each="flower,stat:${flowers}">
+	<div id="top" th:insert="admintop.html"/>
+	<a href="/admin/floweradd">添加鲜花</a>
+
+	<span><a th:href="@{/index/generateExcelReport}" target="_blank">生成Excel报表</a></span>
+	<span><button type="button" onclick="generatePriceChart()">生成评分图表</button></span>
+	<span><button type="button" onclick="generateSalesChart()">生成时长图表</button></span>
+
+	<!-- 显示价格图表的容器 -->
+	<div id="priceChart" style="width: 800px; height: 400px;display: none"></div>
+
+	<!-- 显示销量图表的容器 -->
+	<div id="salesChart" style="width: 800px; height: 400px;display: none"></div>
+
+	<table width="999px" border="0" cellpadding="0"
+		   cellspacing="1" style="background:#d8d8d8;color:#333333">
+		<tr><th width="100px" height="30" align="center" valign="middle">商品编号</th>
+			<th width="150px" align="center" valign="middle">商品图片</th>
+			<th width="110px" height="30" align="center" valign="middle">商品名称</th>
+			<th width="100px" align="center" valign="middle" >原价</th>
+			<th width="100px" align="center" valign="middle">现价</th>
+			<th width="100px" align="center" valign="middle" >销售数量</th>
+			<th width="100px" align="center" valign="middle">操作</th>
+
+		</tr>
+		<!--th: each开始 -->
+		<div th:each="flower,stat:${flowers}">
 			<tr><td valign="middle" bgcolor="#FFFFFF" th:text="${flower.flowerid}"></td>
-				<td align="center" valign="middle" bgcolor="#FFFFFF">	
+				<td align="center" valign="middle" bgcolor="#FFFFFF">
 					<a th:href="@{/index/followerdetail(flowerid=${flower.flowerid})}">
 						<img th:src="@{'/picture/'+${flower.picturem}}" width="60" heigth="60" border=0>
 					</a>
 				</td>
 				<td valign="middle" bgcolor="#FFFFFF" th:text="${flower.fname}"></td>
 				<td valign="middle" bgcolor="#FFFFFF" th:text="${flower.price}"></td>
-				<td valign="middle" bgcolor="#FFFFFF" th:text="${flower.yourprice}"></td>
-				<td valign="middle" bgcolor="#FFFFFF" th:text="${flower.sellednum}"></td>
 				<td valign="middle"  align="center"  bgcolor="#FFFFFF">
-				<a th:href="@{/admin/flowerupdate(flowerid=${flower.flowerid})}">修改</a>
-				<a th:href="@{/admin/flowerdelete(flowerid=${flower.flowerid})}">删除</a>
-<!--				<a th:href='/index/flowerdelete?flowerid='+${flower.flowerid}>删除</a>-->
+					<a th:href="@{/admin/flowerupdate(flowerid=${flower.flowerid})}">修改</a>
+					<a th:href="@{/admin/flowerdelete(flowerid=${flower.flowerid})}">删除</a>
 				</td>
 			</tr>
-			</div><!--th: each结束 -->
-			</table>
+		</div><!--th: each结束 -->
+	</table>
 </center></body>
+
+<script>
+	function toggleChart(containerId) {
+		var container = document.getElementById(containerId);
+		container.style.display = (container.style.display === 'none') ? 'block' : 'none';
+	}
+
+	function generatePriceChart() {
+		// 调用toggleChart函数，实现显示与隐藏
+		toggleChart('priceChart');
+
+		// 发送获取价格图表数据的请求
+		fetch('/api/getPriceChartData')
+				.then(response => response.json())
+				.then(data => {
+					// 处理数据并生成ECharts价格图表
+					var chart = echarts.init(document.getElementById('priceChart'));
+					var xAxisData = data.map(item => item.fname);
+					var seriesData = data.map(item => item.price);
+
+					var option = {
+						title: {
+							text: '评分前十图表',
+							left: 'center'
+						},
+						xAxis: {
+							type: 'category',
+							data: xAxisData
+						},
+						yAxis: {
+							type: 'value'
+						},
+						series: [{
+							data: seriesData,
+							type: 'bar',
+							label: {
+								show: true,
+								position: 'top',
+								formatter: '{c} 元' // 显示价格
+							}
+						}],
+						tooltip: {
+							trigger: 'axis',
+							formatter: '{b}：<br/>{c} ' // 鼠标移到柱状图上时显示价格
+						}
+					};
+
+					chart.setOption(option);
+				})
+				.catch(error => {
+					console.error('获取价格图表数据时出错：', error);
+				});
+	}
+
+	function generateSalesChart() {
+		// 调用toggleChart函数，实现显示与隐藏
+		toggleChart('salesChart');
+
+		// 发送获取时长图表数据的请求
+		fetch('/api/getSalesChartData')
+				.then(response => response.json())
+				.then(data => {
+					// 处理数据并生成ECharts销量图表
+					var chart = echarts.init(document.getElementById('salesChart'));
+					var legendData = data.map(item => item.fname);
+					var lengthData = data.map(item => ({
+						value: parseInt(item.length.match(/\d+/)[0]),
+						name: item.flowerid + ' - ' + item.fname
+					}));
+
+
+					var option = {
+						title: {
+							text: '时长前十图表',
+							top: 'top', // 调整标题位置到图表上方
+							left: 'center'
+						},
+						legend: {
+							orient: 'vertical',
+							left: 'left',
+							top: 'middle',
+							data: legendData
+						},
+						series: [{
+							type: 'pie',
+							data: lengthData,
+							emphasis: {
+								itemStyle: {
+									shadowBlur: 10,
+									shadowOffsetX: 0,
+									shadowColor: 'rgba(0, 0, 0, 0.5)'
+								}
+							},
+						}],
+						tooltip: {
+							trigger: 'item',
+							formatter: '{b}：<br/>{c} 分钟'
+						}
+					};
+
+					chart.setOption(option);
+				})
+				.catch(error => {
+					console.error('获取销量图表数据时出错：', error);
+				});
+	}
+
+</script>

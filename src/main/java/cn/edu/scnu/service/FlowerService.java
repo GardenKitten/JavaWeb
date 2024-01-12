@@ -224,4 +224,31 @@ public class FlowerService extends ServiceImpl<FlowerMapper,Flower> {
         return map;
 
     }
+
+    public List<Flower> getTopPriceFlowers(int topCount) {
+        QueryWrapper<Flower> queryWrapper = new QueryWrapper<>();
+        queryWrapper.orderByDesc("price");
+        queryWrapper.last("LIMIT " + topCount);
+        return flowerMapper.selectList(queryWrapper);
+    }
+
+    public List<Flower> getTopSalesFlowers(int topCount) {
+        QueryWrapper<Flower> queryWrapper = new QueryWrapper<>();
+        queryWrapper.select("*, CAST(SUBSTRING_INDEX(length, ' ', 1) AS SIGNED) AS length_num");
+        queryWrapper.orderByDesc("length_num");
+        queryWrapper.groupBy("fname"); // 根据电影名称分组
+        queryWrapper.last("LIMIT " + topCount);
+        return flowerMapper.selectList(queryWrapper);
+    }
+
+
+
+    // 获取鲜花销售数据
+    public List<Flower> getFlowerSalesData() {
+        QueryWrapper<Flower> queryWrapper = new QueryWrapper<>();
+        queryWrapper.orderByDesc("price"); // 按销售数量降序排列
+        queryWrapper.last("LIMIT 1000"); // 仅获取前100条数据
+
+        return flowerMapper.selectList(queryWrapper);
+    }
 }
