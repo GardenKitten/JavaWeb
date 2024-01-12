@@ -3,11 +3,13 @@
 <head>
     <meta http-equiv="Content-type" content="text/html; charset=UTF-8"/>
     <link href="/css/prodList.css" rel="stylesheet" type="text/css">
+    <script src="/js/jquery-1.4.2.js"></script>
+    <script type="text/javascript" src="/js/VIPPlayOn_ajax.js"></script>
 </head>
 <body>
 <div id="app">
 <center>
-    <div id="top" th:insert="admintop.html"/>
+    <div id="top" th:insert="top.html"/>
     <table style='width:90%;align:center;'>
         <tr>
             <td rowspan=6 width=200>
@@ -40,8 +42,11 @@
         <tr>
             <!--播放按钮-->
             <td style="vertical-align: top; ">
-                <el-button type="primary" icon="el-icon-film"><a th:href="${flower.url}" target="_blank">播放</a>
+<!--                <el-button type="primary" icon="el-icon-film" onclick="check"><a th:href="${flower.url}" target="_blank">播放</a>-->
+                <el-button type="primary" icon="el-icon-film" id="playOn"><a th:href="'/index/flowerdetail/doPlayOn?flowerid='+${flower.flowerid}">播放</a>
                 </el-button>
+<!--                <el-button type="primary" icon="el-icon-film" id="playOn" @click="playOn"><a >播放</a>-->
+<!--                </el-button>-->
             </td>
             <td width=70 id="feature">简介：</td>
             <td><span id="detail" size=2 th:text="${flower.shuoming}"></span></td>
@@ -66,9 +71,6 @@
         <!--评价循环开始 -->
         <table style='width:830px;font-size:small;border-width:1px;border-style:solid;align:center;height:120px;'>
             <tr>
-                <!--<td width=130 rowspan=2><img th:src="'/picture/'+${flower.pictures}"><br>-->
-
-                <!--</td>-->
                 <td>整体评价：
                     <th:block th:each="i: ${#numbers.sequence(1, shoplist.pjstar)}">
                         <img src="/image/review_star_fen.gif">
@@ -80,12 +82,9 @@
                     </th:block>
 
                 </td>
-                <td align=right>评价时间：<span th:text="${shoplist.pjtime}"/> &nbsp;&nbsp;&nbsp;IP:<span
-                        th:text="${shoplist.pjip}"/></td>
+                <td align=right>评价时间：<span th:text="${shoplist.pjtime}"/> &nbsp;&nbsp;&nbsp;IP:<span th:text="${shoplist.pjip}"/></td>
             </tr>
-            <tr>
-                <td colspan=2 th:text="'评价内容：'+${shoplist.pjcontent}">
-            </tr>
+            <tr><td colspan=2 th:text="'评价内容：'+${shoplist.pjcontent}"></tr>
         </table>
     </div>
 </center>
@@ -99,6 +98,36 @@
 <script src="https://unpkg.com/element-ui/lib/index.js"></script>
 
 <script>
+
+    // var ifVip=${flower.id}
+    //
+    //     document.getElementById("playOn").addEventListener("click",function(){
+    //
+    //      //   $("a[id='playOn']").post("/index/flowerdetail/doPlayOn",{"flowerid":flower.flowerid},function(result){
+    //             if(result==false){
+    //                 alert("您不是会员！不可以观看该影片");
+    //                 window.location.href("/index");
+    //             }else{
+    //
+    //             }},false );
+    //
+
+    // document.getElementById("playOn").addEventListener("click",function (){
+    //     axios(
+    //         {
+    //             method:"post",
+    //             url:"/index/flowerdetail/doPlayOn",
+    //
+    //         }
+    //     ).then(function(result){
+    //         alert(result);
+    //     })
+    // },false);
+
+
+
+
+
     new Vue({
         el: '#app',
     });

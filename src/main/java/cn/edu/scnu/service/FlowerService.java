@@ -2,6 +2,7 @@ package cn.edu.scnu.service;
 
 import cn.edu.scnu.entity.Flower;
 import cn.edu.scnu.entity.MyFlower;
+import cn.edu.scnu.entity.TbMember;
 import cn.edu.scnu.mapper.FlowerMapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -41,6 +42,13 @@ public class FlowerService extends ServiceImpl<FlowerMapper,Flower> {
         return fclasses;
     }
 
+    public List<Flower> getRandomFlower(int count){
+        List<Flower> allFlowers = flowerMapper.selectList(null);
+        Collections.shuffle(allFlowers);
+        return allFlowers.subList(0,Math.min(count,allFlowers.size()));
+    }
+
+
     public List<String> findfclass1() {
         QueryWrapper<Flower> queryWrapper=new QueryWrapper<>();
         queryWrapper.select("distinct fclass1");
@@ -51,6 +59,27 @@ public class FlowerService extends ServiceImpl<FlowerMapper,Flower> {
         }
         return fclasses1;
     }
+
+//    查找VIP能查看的影片（评分大于8的）
+//    public List<Flower> findVIP() {
+//        QueryWrapper<Flower> queryWrapper=new QueryWrapper<>();
+//        queryWrapper.between("price",8,10);
+//        List<Flower> fVIP = flowerMapper.selectList(queryWrapper);
+//
+//        return fVIP;
+//    }
+
+    //判断用户是否能查看该影片（是否是VIP用户）
+    public boolean checkUser(Flower flower, TbMember member){
+        System.out.println("checkueser被调用");
+        System.out.println("会员email为"+member.getEmail());
+        System.out.println("会员jifen为"+member.getJifen());
+            if(flower.getPrice()>=8&&member.getJifen()==0){
+                return false;
+            }
+            else return true;
+    }
+
     public String uploadfile(MultipartFile file, String dir){
         // 1.判断后缀是否合法
         // 获取图名称，后缀名称
@@ -198,10 +227,10 @@ public class FlowerService extends ServiceImpl<FlowerMapper,Flower> {
         flowerMapper.updateById(flower);
     }
 
-    public Map<String, Object> queryPage(String fname,String fclass,String fclass1,boolean price,Integer pageNo, Integer pageSize) {
+    public Map<String, Object> queryPage(String cailiao,String fclass,String fclass1,boolean price,Integer pageNo, Integer pageSize) {
         QueryWrapper<Flower> queryWrapper=new QueryWrapper<>();
-        if(!"".equals(fname)&&fname!=null){
-            queryWrapper.like("fname",fname);
+        if(!"".equals(cailiao)&&cailiao!=null){
+            queryWrapper.like("cailiao",cailiao);
         }
         if(!"".equals(fclass)&&fclass!=null){
             queryWrapper.like("fclass",fclass);

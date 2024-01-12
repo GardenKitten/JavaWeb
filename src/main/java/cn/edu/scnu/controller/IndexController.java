@@ -6,7 +6,15 @@ import cn.edu.scnu.entity.TbMember;
 import cn.edu.scnu.service.FlowerService;
 import cn.edu.scnu.service.MemberService;
 import cn.edu.scnu.service.ShoplistService;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -15,18 +23,11 @@ import org.thymeleaf.util.StringUtils;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.util.List;
-import java.util.Map;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
 @Controller
 public class IndexController {
@@ -34,6 +35,7 @@ public class IndexController {
     private MemberService memberService;
     @Autowired
     private FlowerService flowerService;
+
     @Autowired
     private ShoplistService shoplistService;
 
@@ -52,7 +54,7 @@ public class IndexController {
 //            maxprice=Integer.MAX_VALUE;
 //        }
         Map<String, Object> map=flowerService.queryPage(cailiao,fclass,fclass1,price,pageNo,pageSize);
-     //  Map<String, Object> map=flowerService.queryPage(pageNo,pageSize);
+        //  Map<String, Object> map=flowerService.queryPage(pageNo,pageSize);
         Integer count=(Integer) map.get("count");
         List<Flower> flowerList=(List<Flower>) map.get("flowerlist");
         int pageCount=(count%pageSize==0)?(count/pageSize):(count/pageSize+1);
@@ -66,7 +68,7 @@ public class IndexController {
         model.addAttribute("currentPage",pageNo);
         model.addAttribute("flowerlist",flowerList);
         model.addAttribute("fclasses",flowerService.findfclass());
-       model.addAttribute("fclasses1",flowerService.findfclass1());
+        model.addAttribute("fclasses1",flowerService.findfclass1());
         //model.addAttribute("fclasses1",flowerService.findfclass1());
         return "index";
     }
@@ -79,8 +81,42 @@ public class IndexController {
     }
 
     @RequestMapping("/index/showflower")
-    public String showflower(){
+    public String showflower(Model model){
+
+        // 获取随机鲜花列表
+        List<Flower> randomFlowers = flowerService.getRandomFlower(70);
+
+        // 分别设置不同排行方式的随机鲜花列表
+        model.addAttribute("weeklyRanking", flowerService.getRandomFlower(20));
+        model.addAttribute("monthlyRanking", flowerService.getRandomFlower(20));
+        model.addAttribute("popularityRanking", flowerService.getRandomFlower(20));
+        model.addAttribute("regionalRanking", flowerService.getRandomFlower(20));
+
         return "showflower";
+    }
+
+    //会员权限控制
+    @RequestMapping("/index/flowerdetail/doPlayOn")
+    //@ResponseBody
+    public String doPlayOn(String flowerid,HttpSession session){
+        System.out.println("会员播放被调用");
+        TbMember member =(TbMember)session.getAttribute("memberLogin");
+        Flower flower=flowerService.findFlowerById(flowerid);
+        if (member != null) {
+
+            boolean permission =flowerService.checkUser(flower,member);
+            if(permission==true){
+                //String movieURL=flower.getUrl();
+                return "movieURL";
+            }
+            return "VIPsubscribe";
+
+        }
+
+        else
+            return "VIPregister";
+
+
     }
 
     @RequestMapping("/toTest")
@@ -177,7 +213,7 @@ public class IndexController {
     @ResponseBody
     public String doVIPsubscribe(String email,String passw1,HttpServletResponse response){
         // 调用业务层确定合法并且存储数据
-       boolean success=memberService.subscribe(email,passw1);
+        boolean success=memberService.subscribe(email,passw1);
 
         if(success){
 
@@ -186,6 +222,9 @@ public class IndexController {
             return "您已经是会员了！";
         }
     }
+
+    //播放会员影片
+
 
     //登出
     @RequestMapping("/index/logOut")
@@ -250,4 +289,5 @@ public class IndexController {
         List<Flower> salesChartData = flowerService.getTopSalesFlowers(10);
         return ResponseEntity.ok(salesChartData);
     }
+
 }

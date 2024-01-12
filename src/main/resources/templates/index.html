@@ -65,10 +65,8 @@
                     <span><a
                             th:href="@{/index(pageNo=1,fname=${fname},fclass=${fclass},minprice=${minprice},maxprice=${maxprice})}">首页</a></span>&nbsp;&nbsp;
                     <span th:switch="${currentPage}">
-					<a th:case="1"
-                       th:href="@{/index(pageNo=${currentPage},fname=${fname},fclass=${fclass},minprice=${minprice},maxprice=${maxprice})}">上一页</a>&nbsp;&nbsp;
-					<a th:case="*"
-                       href="@{/index(pageNo=${currentPage - 1},fname=${fname},fclass=${fclass},minprice=${minprice},maxprice=${maxprice})}">上一页</a>
+					<a th:case="1" th:href="@{/index(pageNo=${currentPage},fname=${fname},fclass=${fclass},minprice=${minprice},maxprice=${maxprice})}">上一页</a>&nbsp;&nbsp;
+                    <a  th:case="*" th:href="@{/index(pageNo=${currentPage - 1},fname=${fname},fclass=${fclass},minprice=${minprice},maxprice=${maxprice})}">上一页</a>
 				</span>
 
                     <span th:if="${currentPage}==${pageCount}">
