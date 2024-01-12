@@ -1,18 +1,21 @@
 ﻿<center>
     <meta charset="utf-8">
-    <table width=999px border=0>
+    <table width=100% border=0>
         <tr>
-            <td rowspan=2><img src="/image/logo.jpg" style="width:216px; height:68px"> </td>
+            <td rowspan=2  style="width: 790px;text-align: right"><img src="/image/Logo.png" style="width:216px; height:68px"> </td>
             <td style="font-size:x-small;"></td>
-            <td style="background:url('/image/topxmenubg.jpg'); font-size:x-small;text-align:center;">
-                <p th:if="${session.admin}"><a th:href="@{/admin/adminlogOut}" style="text-decoration:none;">退出</a>&nbsp;</p>
-                <p th:unless="${session.admin}"><a th:href="@{/admin/toAdminLogin}" style="text-decoration:none;">登录</a>&nbsp;</p>
+            <td style=" font-size:x-small;text-align:right;">
+                <!--<p th:if="${session.admin}"><a th:href="@{/admin/adminlogOut}" style="text-decoration:none;">退出</a>&nbsp;</p>-->
+                <!--<p th:unless="${session.admin}"><a th:href="@{/admin/toAdminLogin}" style="text-decoration:none;">登录</a>&nbsp;</p>-->
+                <!--<el-button type="primary" icon="el-icon-view"><a  href="/admin/toAdminLogin" style="font-size:x-small;text-decoration:none;">后台登录</a></el-button>-->
+                <el-button type="danger" icon="el-icon-circle-close"><a th:href="@{/admin/adminlogOut}" style="font-size:x-small;text-decoration:none;">退出</a></el-button>
             </td>
         </tr>
-        <tr>
-            <td></td>
-            <td style="text-align:right;"><img src="/image/ttel.jpg"></td>
-        </tr>
+        <!--<tr>-->
+        <!--    <td></td>-->
+        <!--    <td style="text-align:right;"><img src="/image/ttel.jpg"></td>-->
+        <!--</tr>-->
+        <tr></tr>
         <tr><td colspan=3 style="background:url('/image/bg-navbox.png'); font-size: small;text-align:center; width:999px;height:40px">
   <span style=" color:White; font-weight:bold; font-size:medium; font-family:宋体">&nbsp; &nbsp; &nbsp;
     <a href="/admin/flowerindex"  style=" text-decoration:none;"><span style=" color:White; font-weight:bold; font-size:medium; font-family:宋体">鲜花管理</span></a>
@@ -28,8 +31,6 @@
 
         </td>
         </tr>
-        <tr><td colspan=3 style="background:url('/image/search_bg.jpg'); font-size: small;text-align:center; width:999px;height:35px">
 
-        </td>
-        </tr>
     </table></center>
+
