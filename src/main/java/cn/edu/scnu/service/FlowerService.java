@@ -41,6 +41,13 @@ public class FlowerService extends ServiceImpl<FlowerMapper,Flower> {
         return fclasses;
     }
 
+    public List<Flower> getRandomFlower(int count){
+        List<Flower> allFlowers = flowerMapper.selectList(null);
+        Collections.shuffle(allFlowers);
+        return allFlowers.subList(0,Math.min(count,allFlowers.size()));
+    }
+
+
     public List<String> findfclass1() {
         QueryWrapper<Flower> queryWrapper=new QueryWrapper<>();
         queryWrapper.select("distinct fclass1");

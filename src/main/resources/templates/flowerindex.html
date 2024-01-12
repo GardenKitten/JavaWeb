@@ -1,25 +1,18 @@
 <!DOCTYPE HTML>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-	<meta charset="UTF-8">
-    <link href="/css/prodList.css" rel="stylesheet" type="text/css">
-
-    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+	<meta http-equiv="Content-type" content="text/html; charset=UTF-8"/>
+	<link href="/css/prodList.css" rel="stylesheet" type="text/css">
+	<script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
 </head>
 <body>
-
-<div id="app">
-
 <center>
 	<div id="top" th:insert="admintop.html"/>
-
-    <div  id="adminAction">
 	<a href="/admin/floweradd">添加鲜花</a>
 
 	<span><a th:href="@{/index/generateExcelReport}" target="_blank">生成Excel报表</a></span>
 	<span><button type="button" onclick="generatePriceChart()">生成评分图表</button></span>
 	<span><button type="button" onclick="generateSalesChart()">生成时长图表</button></span>
-    </div>
 
 	<!-- 显示价格图表的容器 -->
 	<div id="priceChart" style="width: 800px; height: 400px;display: none"></div>
@@ -27,7 +20,7 @@
 	<!-- 显示销量图表的容器 -->
 	<div id="salesChart" style="width: 800px; height: 400px;display: none"></div>
 
-	<table width="90%" border="0" cellpadding="0"
+	<table width="999px" border="0" cellpadding="0"
 		   cellspacing="1" style="background:#d8d8d8;color:#333333">
 		<tr><th width="100px" height="30" align="center" valign="middle">电影编号</th>
 			<th width="150px" align="center" valign="middle">电影图片</th>
@@ -55,25 +48,9 @@
 			</tr>
 		</div><!--th: each结束 -->
 	</table>
-</center>
-
-</div>
-
-</body>
-
-<!-- 引入vuejs -->
-<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-<!-- 引入样式 -->
-<link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
-<!-- 引入组件库 -->
-<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+</center></body>
 
 <script>
-
-    new Vue({
-        el: '#app',
-    });
-
 	function toggleChart(containerId) {
 		var container = document.getElementById(containerId);
 		container.style.display = (container.style.display === 'none') ? 'block' : 'none';
@@ -180,5 +157,3 @@
 	}
 
 </script>
-
-</html>

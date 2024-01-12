@@ -1,9 +1,8 @@
 <!DOCTYPE HTML>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta http-equiv="Content-type" content="text/html; charset=UTF-8" />
-    <link href="/css/showflower.css" rel="stylesheet" type="text/css">
-    <!-- 根据需要添加额外的样式表或脚本 -->
+    <meta http-equiv="Content-type" content="text/html; charset=UTF-8"/>
+    <link href="/css/prodList.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 <center>
@@ -13,24 +12,48 @@
         <!-- 按周排行 -->
         <div id="weekly_ranking">
             <h2>本周排行</h2>
+            <div th:each="flower : ${weeklyRanking}">
+                <!-- 使用th:href设置链接，将flowerid作为参数传递给flowerdetail界面 -->
+                <a th:href="'/index/flowerdetail?flowerid=' + ${flower.flowerid}">
+                    <div th:text="${flower.fname}"></div>
+                </a>
+            </div>
         </div>
 
         <!-- 按月排行 -->
         <div id="monthly_ranking">
             <h2>本月排行</h2>
+            <div th:each="flower1 : ${monthlyRanking}">
+                <!-- 使用th:href设置链接，将flowerid作为参数传递给flowerdetail界面 -->
+                <a th:href="'/index/flowerdetail?flowerid=' + ${flower1.flowerid}">
+                    <div th:text="${flower1.fname}"></div>
+                </a>
+            </div>
         </div>
 
         <!-- 热度排行 -->
         <div id="popularity_ranking">
             <h2>热度排行</h2>
-
+            <div th:each="flower2 : ${popularityRanking}">
+                <!-- 使用th:href设置链接，将flowerid作为参数传递给flowerdetail界面 -->
+                <a th:href="'/index/flowerdetail?flowerid=' + ${flower2.flowerid}">
+                    <div th:text="${flower2.fname}"></div>
+                </a>
+            </div>
         </div>
 
         <!-- 地区排行 -->
         <div id="regional_ranking">
             <h2>地区排行</h2>
-
+            <div th:each="flower3 : ${regionalRanking}">
+                <!-- 使用th:href设置链接，将flowerid作为参数传递给flowerdetail界面 -->
+                <a th:href="'/index/flowerdetail?flowerid=' + ${flower3.flowerid}">
+                    <div th:text="${flower3.fname}"></div>
+                </a>
+            </div>
         </div>
+
+
 
     </div>
     <div id="bottom" th:insert="bottom.html"/>

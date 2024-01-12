@@ -79,7 +79,17 @@ public class IndexController {
     }
 
     @RequestMapping("/index/showflower")
-    public String showflower(){
+    public String showflower(Model model){
+
+        // 获取随机鲜花列表
+        List<Flower> randomFlowers = flowerService.getRandomFlower(70);
+
+        // 分别设置不同排行方式的随机鲜花列表
+        model.addAttribute("weeklyRanking", flowerService.getRandomFlower(20));
+        model.addAttribute("monthlyRanking", flowerService.getRandomFlower(20));
+        model.addAttribute("popularityRanking", flowerService.getRandomFlower(20));
+        model.addAttribute("regionalRanking", flowerService.getRandomFlower(20));
+
         return "showflower";
     }
 
