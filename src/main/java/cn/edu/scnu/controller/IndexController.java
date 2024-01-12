@@ -78,6 +78,11 @@ public class IndexController {
         return "flowerdetail";
     }
 
+    @RequestMapping("/index/showflower")
+    public String showflower(){
+        return "showflower";
+    }
+
     @RequestMapping("/toTest")
     public String test(){
 

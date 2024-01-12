@@ -1,0 +1,39 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-type" content="text/html; charset=UTF-8" />
+    <link href="/css/showflower.css" rel="stylesheet" type="text/css">
+    <!-- 根据需要添加额外的样式表或脚本 -->
+</head>
+<body>
+<center>
+    <div id="top" th:insert="top.html"/>
+    <div id="content">
+
+        <!-- 按周排行 -->
+        <div id="weekly_ranking">
+            <h2>本周排行</h2>
+        </div>
+
+        <!-- 按月排行 -->
+        <div id="monthly_ranking">
+            <h2>本月排行</h2>
+        </div>
+
+        <!-- 热度排行 -->
+        <div id="popularity_ranking">
+            <h2>热度排行</h2>
+
+        </div>
+
+        <!-- 地区排行 -->
+        <div id="regional_ranking">
+            <h2>地区排行</h2>
+
+        </div>
+
+    </div>
+    <div id="bottom" th:insert="bottom.html"/>
+</center>
+</body>
+</html>
