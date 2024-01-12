@@ -10,16 +10,18 @@
     <center>
         <div id="top" th:insert="top.html"/>
         <div id="content">
+
             <div id="search_div">
                 <form method="post" action="/index">
-                    <span class="input_span">主创名：<input type="text" name="cailiao"/></span>
+
+
+                    <span class="input_span"><input type="text" name="cailiao" placeholder="主创名"/></span>
+
                     <span class="input_span">类型：
 				<select name="fclass">
 				<Option value="">不限</option>
 					<option th:each="fclass:${fclasses}" th:value="${fclass}" th:text="${fclass}"></option>
 				</select>
-
-
 				</span>
 
                     <span class="input_span">地区：
@@ -29,11 +31,13 @@
 				</select>
 				</span>
 
+                    <span>
                     <label>
-                        是否热播:
+                        热播:
                         <input type="checkbox" name="price" value="true">
                     </label>
-                    <input type="submit" value="查 询">
+
+                    <input id="search_button" type="submit" value="查 询"></span>
                 </form>
             </div>
 
@@ -48,42 +52,39 @@
 
                         <div id="prod_name_div" th:text="${flower.fname}"></div>
                         <div>
-                            <div id="gotocart_div">
-                                <a th:href="'/cart/addCart?flowerid='+${flower.flowerid}">加入购物车</a></div>
 
+                            <!--					<div id="say_div" th:text="${flower.sellednum}+'人观看'"></div>-->
                         </div>
-                        <!--					<div id="say_div" th:text="${flower.sellednum}+'人观看'"></div>-->
                     </div>
                 </div>
-            </div>
 
-            <!--分页超链接 -->
-            <div style="clear: both"></div>
-            <div style="clear: both">
-                <br/><br/>
-                <span><a
-                        th:href="@{/index(pageNo=1,fname=${fname},fclass=${fclass},minprice=${minprice},maxprice=${maxprice})}">首页</a></span>&nbsp;&nbsp;
-                <span th:switch="${currentPage}">
+                <!--分页超链接 -->
+                <div style="clear: both"></div>
+                <div style="clear: both">
+                    <br/><br/>
+                    <span><a
+                            th:href="@{/index(pageNo=1,fname=${fname},fclass=${fclass},minprice=${minprice},maxprice=${maxprice})}">首页</a></span>&nbsp;&nbsp;
+                    <span th:switch="${currentPage}">
 					<a th:case="1"
                        th:href="@{/index(pageNo=${currentPage},fname=${fname},fclass=${fclass},minprice=${minprice},maxprice=${maxprice})}">上一页</a>&nbsp;&nbsp;
 					<a th:case="*"
                        href="@{/index(pageNo=${currentPage - 1},fname=${fname},fclass=${fclass},minprice=${minprice},maxprice=${maxprice})}">上一页</a>
 				</span>
 
-                <span th:if="${currentPage}==${pageCount}">
+                    <span th:if="${currentPage}==${pageCount}">
 				<a th:href="@{/index(pageNo=${pageCount},fname=${fname},fclass=${fclass},minprice=${minprice},maxprice=${maxprice})}">下一页</a>&nbsp;&nbsp;
 			</span>
-                <span th:unless="${currentPage}==${pageCount}">
+                    <span th:unless="${currentPage}==${pageCount}">
 				<a th:href="@{/index(pageNo=${currentPage + 1},fname=${fname},fclass=${fclass},minprice=${minprice},maxprice=${maxprice})}">下一页</a>
 			</span>
 
-                <span>&nbsp;&nbsp;<a
-                        th:href="@{/index(pageNo=${pageCount},fname=${fname},fclass=${fclass},minprice=${minprice},maxprice=${maxprice})}">尾页</a></span>
-                <br/><br/>
+                    <span>&nbsp;&nbsp;<a
+                            th:href="@{/index(pageNo=${pageCount},fname=${fname},fclass=${fclass},minprice=${minprice},maxprice=${maxprice})}">尾页</a></span>
+                    <br/><br/>
+                </div>
             </div>
-        </div>
 
-        <div id="bottom" th:insert="bottom.html"/>
+            <div id="bottom" th:insert="bottom.html"/>
     </center>
 
 </div>

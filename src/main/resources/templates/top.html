@@ -1,5 +1,5 @@
 <center>
-  <table width=90% border=0>
+  <table width=100% border=0>
     <tr>
       <td rowspan=2><img th:src="@{/image/logo.jpg}" style="width:216px; height:68px"> </td>
       <td style="font-size:x-small;">
@@ -9,6 +9,7 @@
 
       <td style="font-size:x-small;text-align:right;">
 
+          <!--用戶操作-->
           <p th:if="${session.memberLogin}">
             <el-button type="success" icon="el-icon-user"><a  href="/index/toRegister" style="font-size:x-small;text-decoration:none;">注册</a></el-button>
             <el-button type="primary" icon="el-icon-present"><a  href="/index/toVIPsubscribe" style="font-size:x-small;text-decoration:none;">会员开通</a></el-button>

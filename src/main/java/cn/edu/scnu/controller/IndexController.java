@@ -34,7 +34,7 @@ public class IndexController {
     private FlowerService flowerService;
     @RequestMapping("/index")
     public String index(@RequestParam(name = "pageNo",defaultValue = "1")Integer pageNo,
-                        @RequestParam(name = "pageSize",defaultValue = "8")Integer pageSize,
+                        @RequestParam(name = "pageSize",defaultValue = "10")Integer pageSize,
                         String cailiao,
                         String fclass,
                         String fclass1,

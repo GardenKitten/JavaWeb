@@ -29,19 +29,19 @@ a {
 }
 
 #content{
-	width:999px;
-	margin:10px auto;
+	width:90%;
+	margin:10px 10px 10px 10px;
 }
 /*搜索条*/
 #content #search_div{
 	border: 1px solid #D4D4D4;
 	padding:8px;
+	color: white;
 }
 #content #search_div .input_span{
 	margin: 0px 0px 0px 15px;
 }
 #content #search_div input[type=text]{
-	border: 1px solid #D4D4D4;
 	height:20px;
 }
 #content #search_div input[name=name],#content #search_div input[name=category]{
@@ -50,6 +50,7 @@ a {
 #content #search_div input[name=minprice],#content #search_div input[name=maxprice]{
 	width:60px;;
 }
+
 
 #content #search_div input[type=submit]{
 	border-style:none;
@@ -60,17 +61,21 @@ a {
 	background-image: url("../image/prodlist/search_03.jpg");	
 	margin-left:5px;
 }
-/*商品信息*/
+/*电影信息*/
 #prod_content{
-	width:999px;
+	width:100%;
+	justify-content: center;
+	grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
 }
 #prod_content .prod_div{
 	width:222px;
 	height:347px;
-	border: 1px solid #D4D4D4;
+	border: 1px solid lightskyblue;
 	margin-top:15px;
-	margin-right:19px;
+	margin: 15px;
 	float:left;
+	display: inline-block;
+
 }
 
 #prod_content .prod_div:nth-child(5),#prod_content .prod_div:nth-child(10),
@@ -82,14 +87,15 @@ a {
 }
 
 #prod_content .prod_div img{
-	height: 218px;
+	height: 80%;
     width: 222px;
 	width:100%; 
 }
 #prod_content #prod_name_div{
-	font-size:12px;
-	margin-top:8px;
+	font-size:14px;
+	margin-top:10px;
 	text-align: center;
+	color: aliceblue;
 }
 #prod_content #prod_price_div{
 	font-size:22px;
@@ -119,6 +125,31 @@ a {
 /*	background-color: #FF0000;*/
 /*	color:#fff;*/
 /*}*/
+
+
+/*查询按钮样式*/
+#search_button {
+	border: none;
+	background: blue;
+	color: white;
+	text-align: center;
+	border-radius: 8px;
+}
+
+/*输入框样式*/
+input[type=text] {
+	border: none;
+	outline:none;
+	border-bottom: 3px solid cornflowerblue;
+	background-color: darkgrey;
+	color: white;
+}
+
+input[type=text]:focus {
+	background-color: white;
+	color: black;
+}
+
 
 #say_div{
 	float:left;
