@@ -1,9 +1,11 @@
 package cn.edu.scnu.controller;
 
 import cn.edu.scnu.entity.Flower;
+import cn.edu.scnu.entity.Shoplist;
 import cn.edu.scnu.entity.TbMember;
 import cn.edu.scnu.service.FlowerService;
 import cn.edu.scnu.service.MemberService;
+import cn.edu.scnu.service.ShoplistService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -32,6 +34,9 @@ public class IndexController {
     private MemberService memberService;
     @Autowired
     private FlowerService flowerService;
+    @Autowired
+    private ShoplistService shoplistService;
+
     @RequestMapping("/index")
     public String index(@RequestParam(name = "pageNo",defaultValue = "1")Integer pageNo,
                         @RequestParam(name = "pageSize",defaultValue = "10")Integer pageSize,
@@ -68,6 +73,8 @@ public class IndexController {
     @RequestMapping("/index/flowerdetail")
     public String flowerdetail(String flowerid,Model model){
         model.addAttribute("flower",flowerService.findFlowerById(flowerid));
+        List<Shoplist> shopLists = shoplistService.findAll();
+        model.addAttribute("shoplists",shopLists);
         return "flowerdetail";
     }
 

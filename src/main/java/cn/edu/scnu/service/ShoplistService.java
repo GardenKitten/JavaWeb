@@ -7,6 +7,8 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ShoplistService extends ServiceImpl<ShoplistMapper, Shoplist> {
     @Autowired
@@ -16,5 +18,9 @@ public class ShoplistService extends ServiceImpl<ShoplistMapper, Shoplist> {
         QueryWrapper<Shoplist> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("order_id",id);
         shoplistMapper.delete(queryWrapper);
+    }
+
+    public List<Shoplist> findAll(){
+        return shoplistMapper.selectList(null);
     }
 }

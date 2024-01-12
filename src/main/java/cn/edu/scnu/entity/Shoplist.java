@@ -17,6 +17,6 @@ public class Shoplist {
     private int pjstar;
     private Timestamp pjtime;
     private String pjip;
-    private String pjreplay;
+    private String pjreply;
 
 }
