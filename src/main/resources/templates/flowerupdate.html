@@ -2,30 +2,71 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <link href="/css/prodList.css" rel="stylesheet" type="text/css">
+
+    <style>
+        #modify_button {
+            display: inline-block;
+            color: white;
+
+            width: 280px;
+            height: 50px;
+
+            padding: 0 20px;
+            background: cornflowerblue;
+            border-radius: 5px;
+
+            outline: none;
+            border: none;
+
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.2s linear;
+
+            margin: 7% auto;
+            letter-spacing: 0.05em;
+        }
+
+        #modify {
+            width:80%;
+            border-width:2px;
+            border-style: solid;
+            border-color: blue cornflowerblue lightblue steelblue;
+            margin-top: 50px;
+            margin-bottom: 50px;
+            font-size: 30px;
+            text-align: center;
+        }
+    </style>
+
 </head>
 <body>
+
+<div id="app">
+
 <center>
     <div id="top" th:insert="admintop.html"/>
     <FORM action="/admin/saveUpdate" method="post">
-        <table style="width:550px;border-width:2px;border-style:dotted;">
+        <table id="modify" >
             <tr>
                 <td colspan=2 style="text-align:center; width:650px;">
-                    <font size=4>修改鲜花</font>&nbsp;&nbsp;<a href="/admin/flowerindex">返回</a></td>
+                    <font size=5 color="white">修改电影</font>&nbsp;&nbsp;
+                </td>
             </tr>
 
             <tr>
-                <td style="text-align:right"><font size=2>名称：</font></td>
+                <td style="text-align:right"><font size=2>电影名：</font></td>
                 <td><input type="hidden" name="flowerid" SIZE=18 th:value="${flower.flowerid}">
                     <input type=text name="fname" SIZE=18 th:value="${flower.fname}"></td>
             </tr>
             <tr>
-                <td style="text-align:right"><font size=2 th:text="'类别：'+${flower.myclass}">类别：</font></td>
+                <td style="text-align:right"><font size=2 th:text="'类型：'+${flower.myclass}">类型：</font></td>
                 <td><Select name="myclass" >
-                    <Option value="鲜花">鲜花
-                    <Option value="蛋糕">蛋糕
-                    <Option value="礼篮">礼篮
-                    <Option value="果篮">果篮
-                    <Option value="公仔">公仔
+                    <Option value="动画">动画
+                    <Option value="动作">动作
+                    <Option value="犯罪">犯罪
+                    <Option value="剧情">剧情
+                    <Option value="冒险">冒险
                 </Select>
                 </td>
             </tr>
@@ -38,56 +79,74 @@
                 </td>
             </tr>
             <tr>
-                <td style="text-align:right"><font size=2  th:text="'主材料：'+${flower.fclass1}">主材料：</font></td>
+                <td style="text-align:right"><font size=2  th:text="'地区：'+${flower.fclass1}">地区：</font></td>
                 <td><Select name="fclass1" >
-                    <Option value="玫瑰">玫瑰
-                    <Option value="康乃馨">康乃馨
-                    <Option value="郁金香">郁金香
-                    <Option value="百合">百合
-                    <Option value="扶郎">扶郎
-                    <Option value="马蹄莲">马蹄莲
-                    <Option value="向日葵">向日葵
-                    <Option value="蓝色妖姬">蓝色妖姬
+                    <Option value="中国大陆">中国大陆
+                    <Option value="美国">美国
+                    <Option value="日本">日本
+                    <Option value="澳大利亚">澳大利亚
+                    <Option value="芬兰">芬兰
+                    <Option value="韩国">韩国
+                    <Option value="法国">法国
+                    <Option value="英国">英国
                 </Select>
                 </td>
             </tr>
             <tr>
-                <td style="text-align:right"><font size=2>材料：</font></td>
+                <td style="text-align:right"><font size=2>演员：</font></td>
                 <td><TextArea name="cailiao" Rows="2" Cols="40" th:text="${flower.cailiao}"></TextArea></td>
             </tr>
             <tr>
-                <td style="text-align:right"><font size=2>包装：</font></td>
+                <td style="text-align:right"><font size=2>导演：</font></td>
                 <td><TextArea name="baozhuang" Rows="2" Cols="40" th:text="${flower.baozhuang}"></TextArea></td>
             </tr>
             <tr>
-                <td style="text-align:right"><font size=2>花语：</font></td>
-                <td><TextArea name="huayu" Rows="3" Cols="40"  th:text="${flower.huayu}"></TextArea></td>
+                <td style="text-align:right"><font size=2>语言：</font></td>
+                <td><input name="huayu" Rows="3" Cols="40"  th:value="${flower.huayu}"></input></td>
             </tr>
             <tr>
-                <td style="text-align:right"><font size=2 >说明：</font></td>
-                <td><input type=text name="shuoming" SIZE=40 th:value="${flower.shuoming}"></td>
+                <td style="text-align:right"><font size=2 >简介：</font></td>
+                <td><TextArea type=text name="shuoming" Rows="2" Cols="40"  th:text="${flower.shuoming}"></TextArea></td>
             </tr>
             <tr>
-                <td style="text-align:right"><font size=2>市场价：</font></td>
+                <td style="text-align:right"><font size=2>电影评分：</font></td>
                 <td><input type=text name="price" SIZE=18 th:value="${flower.price}"></td>
             </tr>
-            <tr>
-                <td style="text-align:right"><font size=2>现价：</font></td>
-                <td><input type=text name="yourprice" SIZE=18 th:value="${flower.yourprice}"></td>
-            </tr>
+            <!--<tr>-->
+            <!--    <td style="text-align:right"><font size=2>现价：</font></td>-->
+            <!--    <td><input type=text name="yourprice" SIZE=18 th:value="${flower.yourprice}"></td>-->
+            <!--</tr>-->
 
+            <!--<tr>-->
+            <!--    <td style="text-align:right"><font size=2 th:text="'是否特价：'+${flower.tejia}">是否特价：</font></td>-->
+            <!--    <td><Select name="tejia" >-->
+            <!--        <Option value="是" selected>是-->
+            <!--        <Option value="否">否-->
+            <!--    </Select>-->
+            <!--    </td>-->
+            <!--</tr>-->
             <tr>
-                <td style="text-align:right"><font size=2 th:text="'是否特价：'+${flower.tejia}">是否特价：</font></td>
-                <td><Select name="tejia" >
-                    <Option value="是" selected>是
-                    <Option value="否">否
-                </Select>
-                </td>
-            </tr>
-            <tr>
-                <td colspan=2 style="text-align:center"><INPUT type="submit" name="s" value="提交"></td></tr>
+                <td colspan=2 style="text-align:center">
+                    <button type="submit" name="s" id="modify_button" >确认修改</button>
+                </td></tr>
         </table>
     </FORM>
 </center>
+
+</div>
+
+<!-- 引入vuejs -->
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<!-- 引入样式 -->
+<link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+<!-- 引入组件库 -->
+<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+
+<script>
+    new Vue({
+        el: '#app',
+    });
+</script>
+
 </body>
 </html>

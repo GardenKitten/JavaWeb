@@ -48,9 +48,9 @@
 				</td>
 				<td valign="middle" bgcolor="#FFFFFF" th:text="${flower.fname}"></td>
 				<td valign="middle" bgcolor="#FFFFFF" th:text="${flower.price}"></td>
-				<td valign="middle"  align="center"  bgcolor="#FFFFFF">
-					<a th:href="@{/admin/flowerupdate(flowerid=${flower.flowerid})}">修改</a>
-					<a th:href="@{/admin/flowerdelete(flowerid=${flower.flowerid})}">删除</a>
+				<td valign="middle"  align="center"  style="color: white">
+                    <el-button type="primary"><a th:href="@{/admin/flowerupdate(flowerid=${flower.flowerid})}" style="color: black">修改</a></el-button>
+                    <el-button type="danger" ><a th:href="@{/admin/flowerdelete(flowerid=${flower.flowerid})}" style="color: black">删除</a></el-button>
 				</td>
 			</tr>
 		</div><!--th: each结束 -->

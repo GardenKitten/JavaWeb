@@ -154,7 +154,7 @@ a {
 }
 
 /*输入框样式*/
-input[type=text] {
+#search_input {
 	border: none;
 	outline:none;
 	border-bottom: 3px solid cornflowerblue;
@@ -162,7 +162,7 @@ input[type=text] {
 	color: white;
 }
 
-input[type=text]:focus {
+#search_input:focus {
 	background-color: white;
 	color: black;
 }

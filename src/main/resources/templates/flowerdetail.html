@@ -7,7 +7,7 @@
 <body>
 <div id="app">
 <center>
-    <div id="top" th:insert="top.html"/>
+    <div id="top" th:insert="admintop.html"/>
     <table style='width:90%;align:center;'>
         <tr>
             <td rowspan=6 width=200>
@@ -68,7 +68,7 @@
             <tr>
                 <!--<td width=130 rowspan=2><img th:src="'/picture/'+${flower.pictures}"><br>-->
 
-                </td>
+                <!--</td>-->
                 <td>整体评价：
                     <th:block th:each="i: ${#numbers.sequence(1, shoplist.pjstar)}">
                         <img src="/image/review_star_fen.gif">
